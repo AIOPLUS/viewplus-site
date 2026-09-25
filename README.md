@@ -19,6 +19,7 @@ De site van View Plus: social media management, fotografie en content voor lokal
 | `/portfolio` | `src/pages/portfolio.astro` |
 | `/about` (Over ons) | `src/pages/about.astro` |
 | `/contact` (Kennismaking) | `src/pages/contact.astro` |
+| `/aanmelden` (Plan afsluiten) + `/welkom` | `src/pages/aanmelden.astro`, `src/pages/welkom.astro` |
 | `/articles` (Kennisbank) | `src/pages/articles/` + `src/content/articles/*.md` |
 | `/jobs` (Vacatures) | `src/pages/jobs/` + `src/content/jobs/*.md` |
 | `/privacy-policy`, `/term-and-conditions` | `src/content/legal/*.md` |
@@ -29,6 +30,14 @@ De site van View Plus: social media management, fotografie en content voor lokal
 - Menu, footer, labels, e-mail, socials: `src/config/brand.ts`
 - Nieuw kennisbankartikel: maak `src/content/articles/<slug>.md` (velden: zie `src/content.config.ts`)
 - Nieuwe vacature: maak `src/content/jobs/<slug>.md`; `concept: true` = alleen op de testversie
+
+## Plan online afsluiten (`/aanmelden`)
+
+- Zelfde opbouw als op reviewplus.io: plan kiezen, bedrijfsgegevens, contactpersoon, akkoord (algemene voorwaarden met versie = `ingangsdatum` in `src/content/legal/algemene-voorwaarden.md`, en bevoegdheid), samenvatting met btw (verlegd voor Belgische bedrijven met btw-nummer).
+- Je kiest View Plus Online (1, 3 of 12 maanden) en/of Fotografie (1, 2 of 4 shoots per jaar); minstens één.
+- De prijskaarten linken naar `/aanmelden?online=<optie>` of `/aanmelden?fotografie=<optie>`.
+- Payload: `request_type: "abonnement"`, `merk: "viewplus"`, `plan: { online, fotografie }` (optie-id of null), plus bedrijf, adres, contact, factuur_email en akkoord. Make moet de prijzen zelf opnieuw uitrekenen uit `src/config/content.ts`.
+- **Voor de livegang**: echte algemene voorwaarden (nu "in voorbereiding") en de afspraken over facturering en verlenging.
 
 ## Formulieren
 
@@ -90,6 +99,6 @@ npm run check    # typecheck + lint + build + linkcheck
 ## Nog te doen (Jordan)
 
 - Mailbox support@viewplus.io activeren (staat al op de site in `brand.email`, maar is nog niet actief) en juridische naam invullen.
-- Geldt View Plus Online voor alle platformen samen of per platform? Wat gebeurt er na afloop van de looptijd (verlenging, opzegtermijn)?
+- Geldt View Plus Online voor alle platformen samen of per platform? Wat gebeurt er na afloop van de looptijd (verlenging, opzegtermijn)? Hoe factureren we (vooraf per looptijd, per 4 weken)? Die afspraken horen in de algemene voorwaarden en in de akkoordtekst van `/aanmelden`.
 - Eigen verhaal op Over ons, echte social-mediaprofielen, eigen foto's en portfolio.
 - Algemene voorwaarden opstellen; privacyverklaring laten controleren (staat als concept).

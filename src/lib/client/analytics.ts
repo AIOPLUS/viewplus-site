@@ -1,6 +1,6 @@
 /**
  * Privacyvriendelijke events (Plausible of Umami). Zonder geconfigureerde provider is dit een no-op.
- * Eventnamen: kennismaking_klik, prijs_klik, label_wissel, contact_verzonden, nieuwsbrief_aangemeld, sollicitatie_verzonden
+ * Eventnamen: kennismaking_klik, prijs_klik, label_wissel, contact_verzonden, nieuwsbrief_aangemeld, sollicitatie_verzonden, plan_afgesloten
  */
 export type EventName =
   | 'kennismaking_klik'
@@ -8,7 +8,8 @@ export type EventName =
   | 'label_wissel'
   | 'contact_verzonden'
   | 'nieuwsbrief_aangemeld'
-  | 'sollicitatie_verzonden';
+  | 'sollicitatie_verzonden'
+  | 'plan_afgesloten';
 
 type Props = Record<string, string | number | boolean>;
 

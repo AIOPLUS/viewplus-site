@@ -1,0 +1,77 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHero from '@/components/sections/PageHero.astro';
+import { brand } from '@/config/brand';
+
+/** Bedankpagina na het afsluiten van een plan (/aanmelden), zoals /welkom op reviewplus.io. Niet in de sitemap, niet geïndexeerd. */
+---
+<BaseLayout
+  title="Welkom bij View Plus"
+  description="Je plan is afgesloten. Dit zijn de volgende stappen."
+  path="/welkom"
+  page="welkom"
+  noindex
+>
+  <PageHero line1="Welkom bij" line2="View Plus" text="Je plan is afgesloten. Je ontvangt binnen een paar minuten een bevestiging per e-mail." compact />
+
+  <section class="pb-16 lg:pb-24">
+    <div class="container-rp mx-auto grid max-w-[860px] gap-6">
+      <div class="soft-card grid gap-3 p-6" data-welkom-samenvatting hidden>
+        <p class="font-medium text-ink">Je plan</p>
+        <ul class="grid gap-1 text-ink-soft" data-welkom-regels></ul>
+        <p class="text-sm text-muted" data-welkom-tekst></p>
+      </div>
+
+      <ol class="grid gap-4">
+        <li class="card grid gap-2 p-6 md:p-8">
+          <p class="eyebrow w-fit">Stap 1</p>
+          <h2 class="title">Check je mailbox</h2>
+          <p class="body-muted">In de bevestigingsmail staan je plan, je akkoord op de algemene voorwaarden en de volgende stappen. Niets ontvangen? Kijk ook in je spamfolder of mail naar <a class="text-brand-600 underline" href={`mailto:${brand.email}`}>{brand.email}</a>.</p>
+        </li>
+        <li class="card grid gap-2 p-6 md:p-8">
+          <p class="eyebrow w-fit">Stap 2</p>
+          <h2 class="title">Kennismaking en contentpijlers</h2>
+          <p class="body-muted">We nemen binnen één werkdag contact met je op. In de kennismaking leren we jouw zaak kennen en bepalen we samen drie vaste contentpijlers en de stijl van je posts.</p>
+        </li>
+        <li class="card grid gap-2 p-6 md:p-8" data-stap-shoot>
+          <p class="eyebrow w-fit">Stap 3</p>
+          <h2 class="title">Je shootdag</h2>
+          <p class="body-muted">We plannen samen een moment voor de shootdag. In ongeveer 2 uur fotograferen we jouw zaak, producten en team, en je ontvangt circa 40 bewerkte foto’s.</p>
+        </li>
+        <li class="card grid gap-2 p-6 md:p-8">
+          <p class="eyebrow w-fit">Stap 4</p>
+          <h2 class="title">Je eerste posts</h2>
+          <p class="body-muted">Daarna maken we je contentkalender en gaan de eerste posts online. De factuur ontvang je per e-mail.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  try {
+    const raw = sessionStorage.getItem('vp_abonnement');
+    const ref = new URLSearchParams(location.search).get('ref');
+    const d = raw ? (JSON.parse(raw) as { ref: string; regels: string[]; fotografie: boolean; excl: number; totaal: number; verlegd: boolean; email: string }) : null;
+    if (d && d.ref === ref) {
+      const euro = (n: number) => `€ ${n.toLocaleString('nl-NL', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+      const box = document.querySelector<HTMLElement>('[data-welkom-samenvatting]')!;
+      const lijst = box.querySelector('[data-welkom-regels]')!;
+      d.regels.forEach((r) => {
+        const li = document.createElement('li');
+        li.textContent = r;
+        lijst.appendChild(li);
+      });
+      box.querySelector('[data-welkom-tekst]')!.textContent =
+        `Samen ${euro(d.excl)} excl. btw${d.verlegd ? ' (btw verlegd)' : `, ${euro(d.totaal)} incl. 21% btw`}. Bevestiging verstuurd naar ${d.email}. Referentie: ${d.ref}.`;
+      box.hidden = false;
+      // Zonder fotografie: de shootdag-stap weglaten
+      if (!d.fotografie) {
+        document.querySelector<HTMLElement>('[data-stap-shoot]')?.remove();
+        document.querySelectorAll('ol .eyebrow').forEach((el, i) => { el.textContent = `Stap ${i + 1}`; });
+      }
+    }
+  } catch {
+    /* geen samenvatting, geen probleem */
+  }
+</script>

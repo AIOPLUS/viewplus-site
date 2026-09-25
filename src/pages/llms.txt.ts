@@ -29,6 +29,7 @@ export const GET: APIRoute = async () => {
     "## Pagina's",
     `- [Diensten](${absoluteUrl('/features')})`,
     `- [Prijzen](${absoluteUrl('/plans')})`,
+    `- [Plan direct online afsluiten](${absoluteUrl('/aanmelden')})`,
     `- [Portfolio](${absoluteUrl('/portfolio')})`,
     `- [Over ons](${absoluteUrl('/about')})`,
     `- [Contact en kennismaking](${absoluteUrl('/contact')})`,

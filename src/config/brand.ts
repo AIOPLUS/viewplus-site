@@ -38,7 +38,7 @@ export const labels = [
 ] as const;
 
 /** Pagina's die op beide sites bestaan: de schakelaar blijft dan op dezelfde pagina, anders naar home. */
-export const gedeeldePaden: readonly string[] = ['/', '/features', '/plans', '/about', '/contact', '/articles', '/jobs', '/privacy-policy', '/term-and-conditions'];
+export const gedeeldePaden: readonly string[] = ['/', '/features', '/plans', '/about', '/contact', '/articles', '/jobs', '/aanmelden', '/privacy-policy', '/term-and-conditions'];
 
 /** Hoofdmenu: zelfde opbouw als reviewplus.io, met Portfolio erbij. */
 export const mainNav = [
@@ -70,6 +70,7 @@ export const footerNav: { title: string; links: Link[] }[] = [
       { label: 'Fotografie', href: '/features#fotografie' },
       { label: 'Content & design', href: '/features#content' },
       { label: 'Prijzen', href: '/plans' },
+      { label: 'Plan afsluiten', href: '/aanmelden' },
       { label: 'Portfolio', href: '/portfolio' },
       ...(brand.shopUrl ? [{ label: 'Shop', href: brand.shopUrl }] : []),
       ...(brand.appLoginUrl ? [{ label: 'Inloggen', href: brand.appLoginUrl }] : []),

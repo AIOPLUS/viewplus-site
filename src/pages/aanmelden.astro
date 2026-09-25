@@ -1,0 +1,459 @@
+---
+import { getEntry } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHero from '@/components/sections/PageHero.astro';
+import { LEAD } from '@/config/site';
+import { pakketten } from '@/config/content';
+import { breadcrumbSchema } from '@/lib/schema';
+import { euro } from '@/lib/prijs';
+import { url } from '@/lib/url';
+
+/**
+ * Online een plan afsluiten, zoals /aanmelden op reviewplus.io. Payload: request_type "abonnement", merk "viewplus".
+ * Je kiest View Plus Online en/of Fotografie (minstens één). De Make-koppeling volgt later.
+ */
+const voorwaarden = await getEntry('legal', 'algemene-voorwaarden');
+const avVersie = voorwaarden?.data.ingangsdatum ?? '';
+const online = pakketten.find((p) => p.id === 'online')!;
+const fotografie = pakketten.find((p) => p.id === 'fotografie')!;
+// Standaard: de middelste optie van View Plus Online, geen fotografie (zoals het middelste plan op reviewplus.io)
+const standaardOnline = online.opties[1]!.id;
+const keuzeKaart = 'relative grid cursor-pointer gap-1 rounded-[var(--radius-card)] border border-line p-4 transition-colors hover:border-brand-400 has-checked:border-brand-600 has-checked:bg-brand-50 has-focus-visible:ring-4 has-focus-visible:ring-brand-100';
+---
+<BaseLayout
+  title="Plan afsluiten | View Plus"
+  description="Sluit direct online View Plus af: kies View Plus Online voor 1, 3 of 12 maanden en/of fotografie met 1, 2 of 4 shoots per jaar."
+  path="/aanmelden"
+  page="aanmelden"
+  schemas={[breadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'Prijzen', path: '/plans' }, { name: 'Plan afsluiten', path: '/aanmelden' }])]}
+>
+  <PageHero line1="Plan" line2="afsluiten" text="Kies je plan, vul je bedrijfsgegevens in en ga direct van start. Je ontvangt meteen een bevestiging per e-mail." compact />
+
+  <section class="pb-16 lg:pb-24" aria-label="Aanmeldformulier">
+    <form
+      class="container-rp grid items-start gap-8 lg:grid-cols-[1fr_380px]"
+      novalidate
+      data-aanmelden
+      data-webhook={LEAD.webhookUrl}
+      data-turnstile={LEAD.turnstileSiteKey}
+      data-email={LEAD.fallbackEmail}
+      data-av-versie={avVersie}
+      data-pakketten={JSON.stringify(pakketten.map((p) => ({ id: p.id, naam: p.naam, eenheid: p.eenheid, totaalTekst: p.totaalTekst, opties: p.opties })))}
+    >
+      <div class="grid gap-6">
+        <!-- 1. Plan -->
+        <fieldset class="card grid gap-6 p-6 md:p-8">
+          <legend class="sr-only">Kies je plan</legend>
+          <h2 class="title" aria-hidden="true"><span class="text-brand-600">1.</span> Kies je plan</h2>
+
+          <div class="grid gap-3" role="radiogroup" aria-labelledby="keuze-online">
+            <p class="flex flex-wrap items-baseline justify-between gap-2" id="keuze-online">
+              <span class="font-medium text-ink">{online.naam}</span>
+              <span class="text-sm text-muted">{online.ondertitel}, prijs per week</span>
+            </p>
+            <div class="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+              {online.opties.map((o) => (
+                <label class={keuzeKaart}>
+                  <input type="radio" name="online" value={o.id} class="sr-only" checked={o.id === standaardOnline} />
+                  <span class="text-sm text-muted">{o.looptijd}</span>
+                  <span class="text-lg font-medium text-ink">{o.label}</span>
+                  <span class="text-sm text-ink-soft">€ {euro(o.bedrag)} per week excl. btw</span>
+                  {o.uitgelicht && <span class="mt-1 w-fit rounded-full bg-brand-100 px-2 py-0.5 text-xs text-brand-700">Voordeligst</span>}
+                </label>
+              ))}
+              <label class={keuzeKaart}>
+                <input type="radio" name="online" value="" class="sr-only" />
+                <span class="text-sm text-muted">Alleen fotografie</span>
+                <span class="text-lg font-medium text-ink">Geen</span>
+                <span class="text-sm text-ink-soft">Geen social media management</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="grid gap-3 border-t border-line pt-6" role="radiogroup" aria-labelledby="keuze-fotografie">
+            <p class="flex flex-wrap items-baseline justify-between gap-2" id="keuze-fotografie">
+              <span class="font-medium text-ink">{fotografie.naam}</span>
+              <span class="text-sm text-muted">{fotografie.ondertitel}, prijs per shootdag</span>
+            </p>
+            <div class="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+              {fotografie.opties.map((o) => (
+                <label class={keuzeKaart}>
+                  <input type="radio" name="fotografie" value={o.id} class="sr-only" />
+                  <span class="text-sm text-muted">€ {euro(o.aantal * o.bedrag)} per jaar</span>
+                  <span class="text-lg font-medium text-ink">{o.label}</span>
+                  <span class="text-sm text-ink-soft">€ {euro(o.bedrag)} per shoot excl. btw</span>
+                  {o.uitgelicht && <span class="mt-1 w-fit rounded-full bg-brand-100 px-2 py-0.5 text-xs text-brand-700">Voordeligst</span>}
+                </label>
+              ))}
+              <label class={keuzeKaart}>
+                <input type="radio" name="fotografie" value="" class="sr-only" checked />
+                <span class="text-sm text-muted">Eigen beeld</span>
+                <span class="text-lg font-medium text-ink">Geen</span>
+                <span class="text-sm text-ink-soft">Geen shootdagen</span>
+              </label>
+            </div>
+          </div>
+          <p class="hint">Twijfel je? Kies gerust alleen View Plus Online; een shootdag kun je later altijd toevoegen.</p>
+        </fieldset>
+
+        <!-- 2. Bedrijf -->
+        <fieldset class="card grid gap-5 p-6 md:p-8">
+          <legend class="sr-only">Bedrijfsgegevens</legend>
+          <h2 class="title" aria-hidden="true"><span class="text-brand-600">2.</span> Bedrijfsgegevens</h2>
+          <div class="grid gap-5 sm:grid-cols-2">
+            <div class="field">
+              <label for="land">Land <span class="req" aria-hidden="true">*</span></label>
+              <select id="land" name="land" class="input" autocomplete="country">
+                <option value="NL">Nederland</option>
+                <option value="BE">België</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="bedrijf">Bedrijfsnaam <span class="req" aria-hidden="true">*</span></label>
+              <input id="bedrijf" name="bedrijf" class="input" autocomplete="organization" required />
+            </div>
+            <div class="field">
+              <label for="bedrijfsnummer" data-nummer-label>KvK-nummer <span class="req" aria-hidden="true">*</span></label>
+              <input id="bedrijfsnummer" name="bedrijfsnummer" class="input" inputmode="numeric" required />
+            </div>
+            <div class="field">
+              <label for="btw">Btw-nummer</label>
+              <input id="btw" name="btw" class="input" placeholder="NL123456789B01" />
+            </div>
+            <div class="field">
+              <label for="straat">Straat <span class="req" aria-hidden="true">*</span></label>
+              <input id="straat" name="straat" class="input" autocomplete="address-line1" required />
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+              <div class="field">
+                <label for="huisnummer">Huisnummer <span class="req" aria-hidden="true">*</span></label>
+                <input id="huisnummer" name="huisnummer" class="input" required />
+              </div>
+              <div class="field">
+                <label for="toevoeging">Toevoeging</label>
+                <input id="toevoeging" name="toevoeging" class="input" />
+              </div>
+            </div>
+            <div class="field">
+              <label for="postcode">Postcode <span class="req" aria-hidden="true">*</span></label>
+              <input id="postcode" name="postcode" class="input" autocomplete="postal-code" required />
+            </div>
+            <div class="field">
+              <label for="plaats">Plaats <span class="req" aria-hidden="true">*</span></label>
+              <input id="plaats" name="plaats" class="input" autocomplete="address-level2" required />
+            </div>
+            <div class="field">
+              <label for="website">Website</label>
+              <input id="website" name="website" class="input" inputmode="url" autocomplete="url" placeholder="www.jouwzaak.nl" />
+            </div>
+            <div class="field">
+              <label for="social">Instagram of andere social media</label>
+              <input id="social" name="social" class="input" placeholder="@jouwzaak" aria-describedby="social-hint" />
+              <p class="hint" id="social-hint">Dan kijken we alvast naar je huidige account.</p>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- 3. Contact -->
+        <fieldset class="card grid gap-5 p-6 md:p-8">
+          <legend class="sr-only">Contactpersoon</legend>
+          <h2 class="title" aria-hidden="true"><span class="text-brand-600">3.</span> Contactpersoon</h2>
+          <div class="grid gap-5 sm:grid-cols-2">
+            <div class="field">
+              <label for="voornaam">Voornaam <span class="req" aria-hidden="true">*</span></label>
+              <input id="voornaam" name="voornaam" class="input" autocomplete="given-name" required />
+            </div>
+            <div class="field">
+              <label for="achternaam">Achternaam <span class="req" aria-hidden="true">*</span></label>
+              <input id="achternaam" name="achternaam" class="input" autocomplete="family-name" required />
+            </div>
+            <div class="field">
+              <label for="functie">Functie</label>
+              <input id="functie" name="functie" class="input" autocomplete="organization-title" placeholder="Eigenaar" />
+            </div>
+            <div class="field">
+              <label for="telefoon">Telefoonnummer <span class="req" aria-hidden="true">*</span></label>
+              <input id="telefoon" name="telefoon" type="tel" class="input" autocomplete="tel" required />
+            </div>
+            <div class="field">
+              <label for="email">E-mailadres <span class="req" aria-hidden="true">*</span></label>
+              <input id="email" name="email" type="email" class="input" autocomplete="email" required />
+            </div>
+            <div class="field">
+              <label for="factuur_email">E-mailadres voor facturen</label>
+              <input id="factuur_email" name="factuur_email" type="email" class="input" aria-describedby="factuur-hint" />
+              <p class="hint" id="factuur-hint">Leeg = hetzelfde e-mailadres.</p>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- 4. Akkoord -->
+        <fieldset class="card grid gap-5 p-6 md:p-8">
+          <legend class="sr-only">Akkoord</legend>
+          <h2 class="title" aria-hidden="true"><span class="text-brand-600">4.</span> Akkoord</h2>
+          <p class="text-ink-soft" data-akkoord-tekst>Je sluit View Plus af voor de gekozen looptijd en het gekozen aantal shootdagen, tegen de prijzen hierboven, exclusief btw.</p>
+          <label class="check">
+            <input type="checkbox" name="akkoord_voorwaarden" required />
+            <span>Ik ga akkoord met de <a class="text-brand-600 underline" href={url('/term-and-conditions')} target="_blank" rel="noopener">algemene voorwaarden<span class="sr-only"> (opent in een nieuw tabblad)</span></a> (versie {avVersie}) en de <a class="text-brand-600 underline" href={url('/privacy-policy')} target="_blank" rel="noopener">privacyverklaring<span class="sr-only"> (opent in een nieuw tabblad)</span></a>. <span class="req" aria-hidden="true">*</span></span>
+          </label>
+          <label class="check">
+            <input type="checkbox" name="akkoord_bevoegd" required />
+            <span>Ik ben bevoegd om namens dit bedrijf deze overeenkomst aan te gaan. <span class="req" aria-hidden="true">*</span></span>
+          </label>
+          <!-- Honeypot tegen spam: echte bezoekers zien dit veld niet -->
+          <div class="sr-only" aria-hidden="true">
+            <label for="website_url">Laat dit veld leeg</label>
+            <input id="website_url" name="website_url" tabindex="-1" autocomplete="off" />
+          </div>
+          <div data-turnstile-slot class="min-h-[65px]" hidden={!LEAD.turnstileSiteKey}></div>
+          <p class="error" data-form-error hidden role="alert"></p>
+          <button type="submit" class="btn btn-primary btn-lg w-full sm:w-fit">Akkoord en plan afsluiten</button>
+          <p class="hint">Alleen voor bedrijven. Je ontvangt de factuur per e-mail.</p>
+        </fieldset>
+      </div>
+
+      <!-- Samenvatting -->
+      <aside class="grid gap-4 lg:sticky lg:top-[150px]" aria-labelledby="samenvatting-title">
+        <div class="soft-card grid gap-4 p-6" aria-live="polite">
+          <h2 id="samenvatting-title" class="font-medium text-ink">Je plan</h2>
+          <div class="grid gap-1" data-sam-blok="online">
+            <p class="font-medium text-brand-600" data-sam="online-naam"></p>
+            <p class="text-sm text-ink-soft" data-sam="online-detail"></p>
+          </div>
+          <div class="grid gap-1" data-sam-blok="fotografie">
+            <p class="font-medium text-brand-600" data-sam="fotografie-naam"></p>
+            <p class="text-sm text-ink-soft" data-sam="fotografie-detail"></p>
+          </div>
+          <p class="text-sm text-muted" data-sam="leeg" hidden>Kies View Plus Online, fotografie of allebei.</p>
+          <dl class="grid gap-3 border-t border-line pt-3 text-sm">
+            <div class="flex justify-between gap-4"><dt class="text-muted">Totaal excl. btw</dt><dd class="text-right text-ink" data-sam="excl"></dd></div>
+            <div class="flex justify-between gap-4"><dt class="text-muted" data-sam="btwlabel">Btw 21%</dt><dd class="text-right text-ink" data-sam="btw"></dd></div>
+            <div class="flex justify-between gap-4 font-medium"><dt class="text-ink">Totaal incl. btw</dt><dd class="text-right text-ink" data-sam="totaal"></dd></div>
+          </dl>
+          <p class="text-xs text-muted">Totaal voor de gekozen looptijd en het aantal shootdagen per jaar. Belgisch bedrijf met btw-nummer? Dan wordt de btw verlegd.</p>
+        </div>
+        <div class="soft-card grid gap-2 p-6">
+          <p class="font-medium text-ink">Eerst kennismaken?</p>
+          <p class="body-muted">We denken vrijblijvend mee over je social media en laten zien wat we voor je kunnen doen.</p>
+          <a href={url('/contact')} data-track="kennismaking_klik" data-track-plek="aanmelden" class="btn btn-soft mt-2 w-fit">Plan een kennismaking</a>
+        </div>
+      </aside>
+    </form>
+  </section>
+</BaseLayout>
+
+<script>
+  import { track } from '@/lib/client/analytics';
+  import { normalizeUrl, validateCompanyNumber, validateEmail, validatePhone, validatePostcode, validateVat, type CountryCode } from '@/lib/validation';
+  import { url } from '@/lib/url';
+  import { inclBtw } from '@/lib/prijs';
+
+  interface Optie { id: string; label: string; looptijd: string; aantal: number; bedrag: number }
+  interface Pakket { id: string; naam: string; eenheid: string; totaalTekst: string; opties: Optie[] }
+
+  const form = document.querySelector<HTMLFormElement>('[data-aanmelden]');
+  if (form) {
+    const pakketten = JSON.parse(form.dataset.pakketten ?? '[]') as Pakket[];
+    const webhook = form.dataset.webhook ?? '';
+    const siteKey = form.dataset.turnstile ?? '';
+    const mail = form.dataset.email ?? '';
+    const errorBox = form.querySelector<HTMLElement>('[data-form-error]')!;
+    const submit = form.querySelector<HTMLButtonElement>('button[type=submit]')!;
+    let widgetId: string | undefined;
+
+    const field = (name: string) => form.elements.namedItem(name) as HTMLInputElement;
+    const val = (name: string) => field(name)?.value.trim() ?? '';
+    const radio = (name: string) => form.querySelector<HTMLInputElement>(`input[name="${name}"]:checked`)?.value ?? '';
+    const euro = (n: number) => `€ ${n.toLocaleString('nl-NL', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+
+    // Vooraf gekozen vanaf de prijskaarten: ?online=online-12-maanden of ?fotografie=fotografie-2-shoots
+    const qs = new URLSearchParams(location.search);
+    const kies = (name: string, value: string | null) => {
+      const el = value !== null ? form.querySelector<HTMLInputElement>(`input[name="${name}"][value="${CSS.escape(value)}"]`) : null;
+      if (el) el.checked = true;
+    };
+    if (qs.has('fotografie') && !qs.has('online')) kies('online', ''); // alleen fotografie gekozen
+    kies('online', qs.get('online'));
+    kies('fotografie', qs.get('fotografie'));
+
+    // Belgisch bedrijf met geldig btw-nummer: btw verlegd (geen Nederlandse btw)
+    const land = () => (val('land') === 'BE' ? 'BE' : 'NL') as CountryCode;
+    const verlegd = () => land() === 'BE' && /^BE[01]\d{9}$/.test(val('btw').replace(/[\s.-]/g, '').toUpperCase());
+
+    const keuze = (pakketId: string) => {
+      const p = pakketten.find((x) => x.id === pakketId)!;
+      const o = p.opties.find((x) => x.id === radio(pakketId));
+      return o ? { pakket: p, optie: o, totaal: o.aantal * o.bedrag } : null;
+    };
+    const huidig = () => {
+      const online = keuze('online');
+      const fotografie = keuze('fotografie');
+      const excl = (online?.totaal ?? 0) + (fotografie?.totaal ?? 0);
+      const totaal = verlegd() ? excl : inclBtw(excl);
+      return { online, fotografie, excl, btw: Math.round((totaal - excl) * 100) / 100, totaal };
+    };
+
+    const sam = (key: string, text: string) => {
+      const el = form.querySelector<HTMLElement>(`[data-sam="${key}"]`);
+      if (el) el.textContent = text;
+    };
+    const blok = (key: string, zichtbaar: boolean) => {
+      const el = form.querySelector<HTMLElement>(`[data-sam-blok="${key}"]`);
+      if (el) el.hidden = !zichtbaar;
+    };
+    const omschrijving = (k: NonNullable<ReturnType<typeof keuze>>) =>
+      `${k.optie.looptijd}, ${euro(k.optie.bedrag)} per ${k.pakket.eenheid}: ${euro(k.totaal)} ${k.pakket.totaalTekst} excl. btw`;
+
+    const updateSamenvatting = () => {
+      const { online, fotografie, excl, btw, totaal } = huidig();
+      blok('online', !!online);
+      blok('fotografie', !!fotografie);
+      form.querySelector<HTMLElement>('[data-sam="leeg"]')!.hidden = !!(online || fotografie);
+      if (online) { sam('online-naam', `${online.pakket.naam} (${online.optie.label})`); sam('online-detail', omschrijving(online)); }
+      if (fotografie) { sam('fotografie-naam', `${fotografie.pakket.naam} (${fotografie.optie.label})`); sam('fotografie-detail', omschrijving(fotografie)); }
+      sam('excl', euro(excl));
+      sam('btwlabel', verlegd() ? 'Btw verlegd' : 'Btw 21%');
+      sam('btw', euro(btw));
+      sam('totaal', euro(totaal));
+      const delen = [online, fotografie].filter(Boolean).map((k) => `${k!.pakket.naam} (${k!.optie.label}): ${omschrijving(k!)}`);
+      const tekst = form.querySelector<HTMLElement>('[data-akkoord-tekst]');
+      if (tekst) {
+        tekst.textContent = delen.length
+          ? `Je sluit af: ${delen.join('; ')}. Samen ${euro(excl)} excl. btw${verlegd() ? ', btw verlegd' : `, ${euro(totaal)} incl. 21% btw`}. De verdere afspraken staan in de algemene voorwaarden.`
+          : 'Kies hierboven View Plus Online, fotografie of allebei.';
+      }
+    };
+    form.querySelectorAll('input[name="online"], input[name="fotografie"]').forEach((el) => el.addEventListener('change', updateSamenvatting));
+    updateSamenvatting();
+
+    // Land bepaalt KvK/KBO en het voorbeeld-btw-nummer
+    const updateLand = () => {
+      const label = form.querySelector('[data-nummer-label]');
+      if (label) label.firstChild!.textContent = land() === 'NL' ? 'KvK-nummer ' : 'Ondernemingsnummer (KBO) ';
+      field('btw').placeholder = land() === 'NL' ? 'NL123456789B01' : 'BE0123456789';
+    };
+    field('land').addEventListener('change', () => { updateLand(); updateSamenvatting(); });
+    field('btw').addEventListener('input', updateSamenvatting);
+
+    // Turnstile pas laden zodra iemand het formulier invult.
+    const loadTurnstile = () => {
+      const slot = form.querySelector('[data-turnstile-slot]');
+      if (!siteKey || !slot || widgetId !== undefined || document.querySelector('script[data-ts]')) return;
+      const s = document.createElement('script');
+      s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+      s.async = true;
+      s.dataset.ts = '';
+      s.onload = () => { widgetId = window.turnstile?.render(slot, { sitekey: siteKey, language: 'nl', appearance: 'interaction-only', action: 'abonnement' }); };
+      document.head.appendChild(s);
+    };
+    form.addEventListener('input', loadTurnstile, { once: true });
+
+    const fail = (message: string, focus?: HTMLElement) => {
+      errorBox.textContent = message;
+      errorBox.hidden = false;
+      focus?.focus();
+    };
+    const invalid = (name: string, message: string) => {
+      field(name).setAttribute('aria-invalid', 'true');
+      fail(message, field(name));
+    };
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      errorBox.hidden = true;
+      form.querySelectorAll('[aria-invalid]').forEach((el) => el.removeAttribute('aria-invalid'));
+      const c = land();
+      const { online, fotografie, excl, totaal } = huidig();
+
+      if (!online && !fotografie) return fail('Kies View Plus Online, fotografie of allebei.', form.querySelector<HTMLInputElement>('input[name="online"]') ?? undefined);
+      if (!val('bedrijf')) return invalid('bedrijf', 'Vul je bedrijfsnaam in.');
+      const nummer = validateCompanyNumber(c, val('bedrijfsnummer'));
+      if (!nummer.ok) return invalid('bedrijfsnummer', nummer.error!);
+      const btw = validateVat(c, val('btw'));
+      for (const [name, msg] of [['straat', 'Vul je straat in.'], ['huisnummer', 'Vul je huisnummer in.']] as const) {
+        if (!val(name)) return invalid(name, msg);
+      }
+      const postcode = validatePostcode(c, val('postcode'));
+      if (!postcode.ok) return invalid('postcode', postcode.error!);
+      if (!val('plaats')) return invalid('plaats', 'Vul je plaats in.');
+      const website = normalizeUrl(val('website'));
+      if (!website.ok) return invalid('website', website.error!);
+      for (const [name, msg] of [['voornaam', 'Vul je voornaam in.'], ['achternaam', 'Vul je achternaam in.']] as const) {
+        if (!val(name)) return invalid(name, msg);
+      }
+      const telefoon = validatePhone(c, val('telefoon'));
+      if (!telefoon.ok) return invalid('telefoon', telefoon.error!);
+      const email = validateEmail(val('email'));
+      if (!email.ok) return invalid('email', email.error!);
+      const factuurEmail = val('factuur_email') ? validateEmail(val('factuur_email')) : email;
+      if (!factuurEmail.ok) return invalid('factuur_email', factuurEmail.error!);
+      if (!(field('akkoord_voorwaarden') as HTMLInputElement).checked) return fail('Ga akkoord met de algemene voorwaarden om je plan af te sluiten.', field('akkoord_voorwaarden'));
+      if (!(field('akkoord_bevoegd') as HTMLInputElement).checked) return fail('Bevestig dat je bevoegd bent om deze overeenkomst aan te gaan.', field('akkoord_bevoegd'));
+      if (val('website_url')) return; // honeypot
+      if (!webhook) return fail(`Het formulier is nog niet gekoppeld. Mail ons via ${mail}.`);
+
+      const ref = `VP-${Date.now().toString(36).toUpperCase()}${Math.random().toString(36).slice(2, 5).toUpperCase()}`;
+      submit.disabled = true;
+      submit.textContent = 'Bezig met afsluiten…';
+      try {
+        let token: string | null = null;
+        if (siteKey) {
+          loadTurnstile();
+          for (let i = 0; i < 24 && !token; i++) {
+            token = window.turnstile?.getResponse(widgetId) || null;
+            if (!token) await new Promise((r) => setTimeout(r, 250));
+          }
+          if (!token) throw new Error('turnstile');
+        }
+        const res = await fetch(webhook, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            request_type: 'abonnement',
+            merk: 'viewplus',
+            lead_source: 'site',
+            lead_ref: ref,
+            submitted_at: new Date().toISOString(),
+            pagina: location.href,
+            plan: { online: online?.optie.id ?? null, fotografie: fotografie?.optie.id ?? null },
+            bedrijf: {
+              naam: val('bedrijf'),
+              land: c,
+              bedrijfsnummer_type: c === 'NL' ? 'kvk' : 'kbo',
+              bedrijfsnummer: nummer.value,
+              btw_nummer: btw.value,
+              website: website.value,
+              social: val('social'),
+            },
+            adres: { straat: val('straat'), huisnummer: val('huisnummer'), toevoeging: val('toevoeging'), postcode: postcode.value, plaats: val('plaats'), land: c },
+            contact: { voornaam: val('voornaam'), achternaam: val('achternaam'), functie: val('functie'), email: email.value, telefoon: telefoon.value },
+            factuur_email: factuurEmail.value,
+            akkoord: { voorwaarden: true, bevoegd: true, voorwaarden_versie: form.dataset.avVersie, tijdstip: new Date().toISOString() },
+            turnstile_token: token,
+          }),
+        });
+        if (!res.ok) throw new Error(String(res.status));
+        track('plan_afgesloten', { online: online?.optie.id ?? 'geen', fotografie: fotografie?.optie.id ?? 'geen' });
+        try {
+          sessionStorage.setItem('vp_abonnement', JSON.stringify({
+            ref,
+            regels: [online, fotografie].filter(Boolean).map((k) => `${k!.pakket.naam} (${k!.optie.label}): ${omschrijving(k!)}`),
+            fotografie: !!fotografie,
+            excl,
+            totaal,
+            verlegd: verlegd(),
+            email: email.value,
+          }));
+        } catch { /* niet erg */ }
+        location.href = url(`/welkom?ref=${encodeURIComponent(ref)}`);
+      } catch (err) {
+        window.turnstile?.reset(widgetId);
+        submit.disabled = false;
+        submit.textContent = 'Akkoord en plan afsluiten';
+        fail(err instanceof Error && err.message === 'turnstile'
+          ? 'De beveiligingscontrole is nog niet afgerond. Staat er een vakje "Ik ben geen robot"? Vink het aan en klik daarna opnieuw op afsluiten.'
+          : `Afsluiten is niet gelukt. Probeer het opnieuw of mail naar ${mail}.`);
+      }
+    });
+  }
+</script>

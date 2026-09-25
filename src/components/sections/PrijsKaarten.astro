@@ -66,7 +66,7 @@ const { kop: Kop = 'h3' } = Astro.props;
                     </li>
                   ))}
                 </ul>
-                <a href={url(`/contact?dienst=${o.id}`)} class:list={['btn mt-auto w-full', o.uitgelicht ? 'btn-primary' : 'btn-soft']} data-track="prijs_klik" data-track-plek={o.id}>Kies {o.label}</a>
+                <a href={url(`/aanmelden?${p.id}=${o.id}`)} class:list={['btn mt-auto w-full', o.uitgelicht ? 'btn-primary' : 'btn-soft']} data-track="prijs_klik" data-track-plek={o.id}>Kies {o.label}</a>
               </div>
             </li>
           ))}
