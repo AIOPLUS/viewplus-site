@@ -1,0 +1,41 @@
+---
+/** Prijskaarten in dezelfde opmaak als de plannen op reviewplus.io. Prijzen excl. btw, met het bedrag incl. 21% btw eronder. */
+import { prijzen } from '@/config/content';
+import { inclBtwTekst } from '@/lib/prijs';
+import { url } from '@/lib/url';
+
+interface Props {
+  /** Kop per kaart als h2 (prijzenpagina) of h3 (in een sectie). */
+  kop?: 'h2' | 'h3';
+}
+const { kop: Kop = 'h3' } = Astro.props;
+---
+<ul class="mx-auto grid max-w-[960px] gap-6 md:grid-cols-2">
+  {prijzen.map((p) => (
+    <li class:list={['reveal flex flex-col overflow-hidden rounded-[var(--radius-panel)] border', p.uitgelicht ? 'border-brand-600 shadow-[var(--shadow-glow)]' : 'border-brand-200']}>
+      <div class:list={['grid gap-4 px-8 pb-12 pt-8 text-white', p.uitgelicht ? 'bg-gradient-to-br from-brand-600 to-brand-500' : 'bg-gradient-to-br from-brand-500 to-brand-400']}>
+        <p class="flex items-center gap-2 text-sm"><span class="size-1.5 rounded-full bg-white" aria-hidden="true"></span>{p.label}</p>
+        <p class="flex items-end gap-1">
+          <span class="text-[52px] font-medium leading-none tracking-[-0.03em]">€{p.bedrag}</span>
+          <span class="pb-1 text-sm text-white/85">{p.perKort}</span>
+        </p>
+        <p class="-mt-2 text-sm text-white/90">€ {inclBtwTekst(p.bedrag)} incl. 21% btw</p>
+      </div>
+      <div class="-mt-6 flex flex-1 flex-col gap-6 rounded-t-[var(--radius-panel)] bg-white px-8 pb-8 pt-8">
+        <div>
+          <Kop class="title">{p.naam}</Kop>
+          <p class="mt-1 text-sm text-muted">€ {p.bedrag} per {p.per}, exclusief btw</p>
+        </div>
+        <ul class="grid gap-3 border-t border-line pt-6 text-[15px]">
+          {p.kenmerken.map((k) => (
+            <li class="flex gap-3 text-ink-soft">
+              <svg class="mt-0.5 shrink-0 text-brand-600" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg>
+              {k}
+            </li>
+          ))}
+        </ul>
+        <a href={url(`/contact?dienst=${p.id}`)} class:list={['btn mt-auto w-full', p.uitgelicht ? 'btn-primary' : 'btn-soft']} data-track="prijs_klik" data-track-plek={p.id}>{p.knop}</a>
+      </div>
+    </li>
+  ))}
+</ul>

@@ -1,0 +1,85 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHero from '@/components/sections/PageHero.astro';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
+import Doelen from '@/components/sections/Doelen.astro';
+import LabelBand from '@/components/sections/LabelBand.astro';
+import CtaFinal from '@/components/sections/CtaFinal.astro';
+import { doelgroepen, pijlers } from '@/config/content';
+import { breadcrumbSchema } from '@/lib/schema';
+import { img } from '@/lib/images';
+import restaurant from '@/assets/img/foto-restaurant.jpg';
+import salon from '@/assets/img/foto-salon.jpg';
+import winkel from '@/assets/img/foto-winkel.jpg';
+
+/*
+ * TODO Jordan: vul dit aan met jullie eigen verhaal (waarom View Plus is begonnen, wie erachter zit, waar jullie gevestigd zijn).
+ * De teksten hieronder beschrijven alleen wat View Plus doet; er staan bewust geen verzonnen feiten in.
+ */
+---
+<BaseLayout
+  title="Over View Plus: social media en fotografie voor lokale ondernemers"
+  description="View Plus brengt de sfeer van jouw zaak online onder de aandacht, met professionele fotografie, sterke content en actief beheer van je social media. Het zusterlabel van Review Plus."
+  path="/about"
+  page="over-ons"
+  schemas={[breadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'Over ons', path: '/about' }])]}
+>
+  <PageHero line1="Over" line2="View Plus" text="We brengen de sfeer van jouw zaak ook buiten de deur onder de aandacht, met een consistente en herkenbare online uitstraling." />
+
+  <section class="py-16 lg:py-24" aria-labelledby="missie-title">
+    <div class="container-rp grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
+      <div class="reveal grid grid-cols-2 gap-4">
+        <Image src={restaurant} alt="Restauranthouder met gasten" widths={[300, 600]} sizes="300px" class="aspect-[4/5] w-full rounded-[var(--radius-panel)] object-cover" />
+        <div class="grid gap-4 pt-10">
+          <Image src={salon} alt="Interieur van een beautysalon" widths={[300, 600]} sizes="300px" class="aspect-square w-full rounded-[var(--radius-panel)] object-cover" />
+          <Image src={winkel} alt="Ondernemer in haar winkel" widths={[300, 600]} sizes="300px" class="aspect-square w-full rounded-[var(--radius-panel)] object-cover" />
+        </div>
+      </div>
+      <div class="reveal grid gap-6">
+        <p class="eyebrow w-fit">Onze missie</p>
+        <h2 id="missie-title" class="heading-lg">Jouw zaak verdient online dezelfde aandacht als in het echt</h2>
+        <p class="lead text-ink-soft">Veel ondernemers weten dat social media belangrijk is, maar hebben geen tijd om er elke week goede content voor te maken. Daardoor blijft hun account stil, of past het niet bij de zaak zelf.</p>
+        <p class="lead text-ink-soft">View Plus neemt dat werk uit handen. Van contentplanning en professionele fotografie tot het plaatsen van posts en actief contact met je doelgroep. Alles afgestemd op de uitstraling van jouw zaak.</p>
+        <p class="lead text-ink-soft">View Plus is het zusterlabel van Review Plus. Waar Review Plus zorgt voor meer en betere reviews, zorgt View Plus voor sterke content op social media.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 lg:py-24" aria-labelledby="pijlers-title">
+    <div class="container-rp">
+      <SectionHeader id="pijlers-title" eyebrow="Wat we doen" line1="Drie pijlers," line2="één uitstraling" class="reveal" />
+      <ol class="mt-14 grid gap-4 md:grid-cols-3 lg:mt-20">
+        {pijlers.map((p, i) => (
+          <li class="soft-card reveal grid content-start gap-4 p-8">
+            <span class="text-[48px] font-light leading-none tracking-[-0.03em] text-brand-600" aria-hidden="true">0{i + 1}</span>
+            <h3 class="title">{p.titel}</h3>
+            <p class="body-muted">{p.tekst}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section id="voor-wie" class="scroll-mt-40 py-16 lg:py-24" aria-labelledby="voor-wie-title">
+    <div class="container-rp">
+      <SectionHeader id="voor-wie-title" eyebrow="Voor wie" line1="Gemaakt voor" line2="lokale ondernemers" class="reveal" />
+      <ul class="mt-14 grid gap-4 sm:grid-cols-2 lg:mt-20 lg:grid-cols-4">
+        {doelgroepen.map((d) => (
+          <li class="reveal relative isolate flex h-[280px] items-end overflow-hidden rounded-[var(--radius-panel)] p-6 text-white">
+            <Image src={img(d.foto)} alt="" widths={[420, 840]} sizes="(min-width: 1200px) 320px, 50vw" class="absolute inset-0 -z-10 size-full object-cover" />
+            <span class="absolute inset-0 -z-10 bg-gradient-to-t from-brand-900/85 via-brand-900/25 to-transparent" aria-hidden="true"></span>
+            <span class="grid gap-1">
+              <span class="text-xl font-medium">{d.naam}</span>
+              <span class="text-sm text-white/90">{d.tekst}</span>
+            </span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <Doelen />
+  <LabelBand />
+  <CtaFinal />
+</BaseLayout>

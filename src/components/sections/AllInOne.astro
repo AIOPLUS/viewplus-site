@@ -1,0 +1,58 @@
+---
+import { Image } from 'astro:assets';
+import ArrowButton from '@/components/ui/ArrowButton.astro';
+import { pijlers } from '@/config/content';
+import { url } from '@/lib/url';
+import { iconen } from '@/lib/iconen';
+import restaurant from '@/assets/img/foto-restaurant.jpg';
+import winkel from '@/assets/img/foto-winkel.jpg';
+import salon from '@/assets/img/foto-salon.jpg';
+import hotel from '@/assets/img/foto-hotel.jpg';
+
+// Zwevende sfeerfoto's rond de tekst, zoals op reviewplus.io.
+const fotos = [
+  { src: restaurant, alt: 'Restauranthouder in gesprek met gasten', pos: 'left-0 top-4', delay: '0s' },
+  { src: winkel, alt: 'Ondernemer in haar winkel', pos: 'right-0 top-24', delay: '1.2s' },
+  { src: salon, alt: 'Interieur van een beautysalon', pos: 'left-[6%] bottom-0', delay: '.6s' },
+  { src: hotel, alt: 'Gastheer achter de balie', pos: 'right-[4%] -bottom-10', delay: '1.8s' },
+];
+---
+<section class="relative py-24 lg:py-40" aria-labelledby="allinone-title">
+  <div class="container-rp relative grid-bg">
+    {fotos.map((f) => (
+      <div class={`float-photo absolute hidden h-[112px] w-[216px] overflow-hidden rounded-full shadow-[var(--shadow-card)] lg:block ${f.pos}`} style={`animation-delay:${f.delay}`}>
+        <Image src={f.src} alt={f.alt} widths={[216, 432]} sizes="216px" class="size-full object-cover" />
+      </div>
+    ))}
+
+    <div class="reveal relative mx-auto grid max-w-[760px] justify-items-center gap-8 text-center">
+      <h2 id="allinone-title" class="display text-brand-600">Professionele fotografie, sterke content en actief beheer</h2>
+      <span class="size-2 rounded-full bg-brand-600" aria-hidden="true"></span>
+      <div class="flex items-center gap-4">
+        <span class="hidden h-px w-12 bg-brand-600 sm:block" aria-hidden="true"></span>
+        <p class="lead max-w-[460px] text-ink">Samen zorgen we voor een consistente online uitstraling die past bij jouw zaak en jouw doelgroep.</p>
+        <span class="hidden h-px w-12 bg-brand-600 sm:block" aria-hidden="true"></span>
+      </div>
+      <ul class="grid w-full gap-4 pt-2 sm:grid-cols-3 sm:gap-0 sm:divide-x sm:divide-line">
+        {pijlers.map((p) => (
+          <li class="grid content-start justify-items-center gap-3 px-4">
+            <span class="grid size-14 place-items-center rounded-2xl bg-white text-brand-600 shadow-[var(--shadow-card)]" aria-hidden="true">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d={iconen[p.icoon]} /></svg>
+            </span>
+            <h3 class="text-sm font-semibold uppercase tracking-[0.08em] text-ink">{p.titel}</h3>
+            <p class="max-w-[220px] text-[15px] text-ink-soft">{p.tekst}</p>
+          </li>
+        ))}
+      </ul>
+      <ArrowButton href={url('/contact')} label="Plan een kennismaking" track="kennismaking_klik" />
+    </div>
+  </div>
+</section>
+
+<style>
+  .float-photo { animation: zweef 7s ease-in-out infinite; }
+  @keyframes zweef {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-14px); }
+  }
+</style>

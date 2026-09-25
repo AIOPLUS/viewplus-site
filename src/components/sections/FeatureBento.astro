@@ -1,0 +1,80 @@
+---
+import { Image } from 'astro:assets';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
+import Feed from '@/components/mockups/Feed.astro';
+import Fotos from '@/components/mockups/Fotos.astro';
+import Kalender from '@/components/mockups/Kalender.astro';
+import Logo from '@/components/layout/Logo.astro';
+import { diensten } from '@/config/content';
+import { url } from '@/lib/url';
+import bg1 from '@/assets/img/bento-bg-1.png';
+import bg2 from '@/assets/img/bento-bg-2.png';
+import bg3 from '@/assets/img/bento-bg-3.png';
+import bgPaars from '@/assets/img/bento-bg-paars.png';
+
+/** Zelfde raster als de functies op reviewplus.io: twee hoge kaarten, een brede en een gekleurde. */
+interface Props {
+  line1?: string;
+  line2?: string;
+}
+const { line1 = 'Alles voor jouw', line2 = 'online zichtbaarheid' } = Astro.props;
+const [social, foto, content] = diensten;
+const chip = 'flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm text-ink shadow-[var(--shadow-card)]';
+---
+<section class="py-20 lg:py-28" aria-labelledby="bento-title">
+  <div class="container-rp">
+    <SectionHeader id="bento-title" eyebrow="Onze diensten" line1={line1} line2={line2} class="reveal" />
+
+    <div class="mt-14 grid gap-4 lg:mt-20 lg:grid-cols-2 lg:gap-6">
+      <!-- Kaart 1: social media management -->
+      <article class="reveal relative isolate grid min-h-[520px] overflow-hidden rounded-[var(--radius-card)] bg-brand-50 lg:min-h-[636px]">
+        <Image src={bg1} alt="" class="absolute inset-0 -z-10 size-full object-cover" widths={[640, 1280]} sizes="(min-width: 1200px) 640px, 100vw" />
+        <div class="relative h-[380px] overflow-hidden lg:h-[440px]">
+          <Feed class="absolute left-1/2 top-10 w-[230px] -translate-x-1/2 rotate-[-4deg] lg:w-[260px]" />
+          <span class={`${chip} absolute left-[6%] top-[22%] max-sm:hidden`} aria-hidden="true">
+            <span class="size-2 rounded-full bg-success"></span>Post ingepland · do 18:00
+          </span>
+          <span class={`${chip} absolute bottom-[14%] right-[6%] max-sm:hidden`} aria-hidden="true">
+            <span class="size-2 rounded-full bg-brand-600"></span>2–3 posts per week
+          </span>
+        </div>
+        <div class="self-end p-8 lg:p-10">
+          <h3 class="title"><a href={url(`/features#${social.id}`)} class="hover:text-brand-600">{social.label}</a></h3>
+          <p class="body-muted mt-2 max-w-[440px]">We maken een contentkalender, plaatsen 2 tot 3 posts per week met captions en hashtags, en reageren op alle reacties.</p>
+        </div>
+      </article>
+
+      <!-- Kaart 2: fotografie -->
+      <article class="reveal relative isolate grid min-h-[520px] content-between overflow-hidden rounded-[var(--radius-card)] bg-brand-50 lg:min-h-[636px]">
+        <Image src={bg2} alt="" class="absolute inset-0 -z-10 size-full object-cover" widths={[640, 1280]} sizes="(min-width: 1200px) 640px, 100vw" />
+        <div class="p-8 lg:p-14">
+          <h3 class="title max-w-[420px]"><a href={url(`/features#${foto.id}`)} class="hover:text-brand-600">Professionele fotografie</a></h3>
+          <p class="body-muted mt-2 max-w-[440px]">Een shootdag van ongeveer 2 uur levert circa 40 bewerkte foto’s op, vrij te gebruiken voor social media én je website.</p>
+        </div>
+        <Fotos class="px-6 pb-10 lg:px-10 lg:pb-14" />
+      </article>
+    </div>
+
+    <div class="mt-4 grid gap-4 lg:mt-6 lg:grid-cols-[1.4fr_1fr] lg:gap-6">
+      <!-- Kaart 3: content en contentkalender, breed -->
+      <article class="reveal relative isolate grid min-h-[424px] content-between gap-8 overflow-hidden rounded-[var(--radius-card)] bg-brand-50 p-8 lg:p-12">
+        <Image src={bg3} alt="" class="absolute inset-0 -z-10 size-full object-cover" widths={[760, 1500]} sizes="(min-width: 1200px) 760px, 100vw" />
+        <div class="self-start">
+          <h3 class="title"><a href={url(`/features#${content.id}`)} class="hover:text-brand-600">Content met een plan</a></h3>
+          <p class="body-muted mt-2 max-w-[460px]">Drie vaste contentpijlers, samen bepaald, en een kalender vooraf. Met grafische elementen in jouw stijl.</p>
+        </div>
+        <Kalender />
+      </article>
+
+      <!-- Kaart 4: kennismaken -->
+      <article class="reveal relative isolate grid min-h-[360px] content-between overflow-hidden rounded-[var(--radius-card)] bg-brand-600 p-8 text-white lg:min-h-[424px] lg:p-14">
+        <Image src={bgPaars} alt="" class="absolute inset-0 -z-10 size-full object-cover" widths={[540, 1080]} sizes="(min-width: 1200px) 540px, 100vw" />
+        <Logo size={80} color="#fff" />
+        <div class="grid gap-6">
+          <h3 class="text-[32px] font-medium leading-tight lg:text-[40px]">Digitale koffie?</h3>
+          <a href={url('/contact')} data-track="kennismaking_klik" data-track-plek="bento" class="btn btn-white w-fit">Plan een kennismaking</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>

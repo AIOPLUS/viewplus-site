@@ -1,0 +1,49 @@
+---
+/** Contentkalender van één week met drie posts op de vaste contentpijlers: illustratie. */
+import { Image } from 'astro:assets';
+import { img } from '@/lib/images';
+
+interface Props {
+  class?: string;
+}
+const { class: cls = '' } = Astro.props;
+const dagen = ['Ma', 'Di', 'Wo', 'Do', 'Vr', 'Za', 'Zo'];
+const pijlers = [
+  { naam: 'Sfeer', stip: 'bg-brand-600', rand: 'ring-brand-600' },
+  { naam: 'Producten', stip: 'bg-pink-600', rand: 'ring-pink-600' },
+  { naam: 'Team', stip: 'bg-amber-500', rand: 'ring-amber-500' },
+];
+// Dag-index → pijler, tijd en foto
+const posts: Record<number, { pijler: number; tijd: string; foto: string }> = {
+  1: { pijler: 0, tijd: '12:00', foto: 'foto-restaurant.jpg' },
+  3: { pijler: 1, tijd: '18:00', foto: 'foto-winkel.jpg' },
+  5: { pijler: 2, tijd: '10:00', foto: 'foto-hotel.jpg' },
+};
+---
+<div class={`rounded-[var(--radius-card)] bg-white p-4 shadow-[var(--shadow-card)] sm:p-5 ${cls}`} role="img" aria-label="Voorbeeld van een contentkalender: drie posts per week, op de pijlers sfeer, producten en team">
+  <div class="mb-4 flex items-center justify-between gap-3">
+    <p class="text-sm font-medium text-ink">Contentkalender</p>
+    <p class="rounded-full bg-surface-alt px-3 py-1 text-xs text-muted ring-1 ring-line">Deze week</p>
+  </div>
+  <div class="grid grid-cols-7 gap-1.5">
+    {dagen.map((d, i) => {
+      const post = posts[i];
+      return (
+        <div class="grid min-h-[104px] content-start gap-1.5 rounded-lg bg-surface-alt p-1 ring-1 ring-line/70">
+          <span class="text-center text-[11px] text-muted">{d}</span>
+          {post && (
+            <span class="grid gap-1">
+              <Image src={img(post.foto)} alt="" widths={[80, 160]} sizes="60px" class={`aspect-square w-full rounded-md object-cover ring-2 ${pijlers[post.pijler].rand}`} />
+              <span class="text-center text-[10px] leading-none text-ink-soft">{post.tijd}</span>
+            </span>
+          )}
+        </div>
+      );
+    })}
+  </div>
+  <ul class="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-xs text-ink-soft">
+    {pijlers.map((p) => (
+      <li class="flex items-center gap-1.5"><span class={`size-2 rounded-full ${p.stip}`}></span>{p.naam}</li>
+    ))}
+  </ul>
+</div>

@@ -1,0 +1,32 @@
+---
+/** Reactie onder een post en het antwoord van "jouw zaak": illustratie van engagement, geen echte reactie. */
+interface Props {
+  class?: string;
+}
+const { class: cls = '' } = Astro.props;
+---
+<div class={`grid w-full max-w-[420px] gap-3 ${cls}`} role="img" aria-label="Voorbeeld: een volger reageert op een post en jouw zaak reageert terug">
+  <div class="flex items-start gap-3 rounded-2xl bg-white p-4 shadow-[var(--shadow-card)]">
+    <span class="size-9 shrink-0 rounded-full bg-gradient-to-br from-amber-200 to-pink-300" aria-hidden="true"></span>
+    <div class="grid flex-1 gap-1">
+      <span class="h-2 w-20 rounded-full bg-ink/70"></span>
+      <p class="text-[15px] text-ink">Ziet er heerlijk uit! Is dit nieuw op de kaart?</p>
+      <p class="text-xs text-muted">2 min · Beantwoorden</p>
+    </div>
+    <svg class="mt-1 shrink-0 text-pink-600" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.5-9.1C1 8.3 3.4 4 7.4 4c2 0 3.5 1.1 4.6 2.6C13.1 5.1 14.6 4 16.6 4c4 0 6.4 4.3 4.9 7.9C19.5 16.4 12 21 12 21Z" /></svg>
+  </div>
+  <div class="ml-8 flex items-start gap-3 rounded-2xl bg-brand-100 p-4">
+    <span class="grid size-9 shrink-0 place-items-center rounded-full bg-white ring-2 ring-brand-300" aria-hidden="true">
+      <svg width="14" height="15" viewBox="0 0 906 958" fill="var(--color-logo)"><path d="M0 0H386V410A386 410 0 0 1 0 0Z" /><rect x="520" width="386" height="410" /><path d="M386 548V958H0A386 410 0 0 1 386 548Z" /><rect x="520" y="548" width="386" height="410" /></svg>
+    </span>
+    <div class="grid flex-1 gap-1">
+      <p class="text-sm font-medium text-brand-700">Jouw zaak</p>
+      <p class="text-[15px] text-ink">Ja, sinds deze week! Kom je hem proeven?</p>
+      <p class="text-xs text-ink-soft">Net geplaatst</p>
+    </div>
+  </div>
+  <div class="flex flex-wrap gap-2">
+    <span class="rounded-full bg-white px-3 py-1.5 text-xs text-ink-soft shadow-[var(--shadow-card)]">✓ Elke reactie beantwoord</span>
+    <span class="rounded-full bg-white px-3 py-1.5 text-xs text-ink-soft shadow-[var(--shadow-card)]">Interactie met lokale accounts</span>
+  </div>
+</div>

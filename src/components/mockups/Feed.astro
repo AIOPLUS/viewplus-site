@@ -1,0 +1,51 @@
+---
+/**
+ * Telefoon met een Instagram-achtig profiel van "jouw zaak": illustratie, geen echte account.
+ * Alle maten schalen mee met de breedte (container query units), zodat hij in elke kaart past.
+ */
+import { Image } from 'astro:assets';
+import iphone from '@/assets/img/iphone-frame.png';
+import { img } from '@/lib/images';
+
+interface Props {
+  class?: string;
+}
+const { class: cls = '' } = Astro.props;
+const fotos = ['foto-restaurant.jpg', 'foto-hotel.jpg', 'foto-winkel.jpg', 'foto-salon.jpg', 'foto-vrije-tijd.jpg', 'foto-sportschool.jpg', 'foto-zorg.jpg', 'foto-franchise.jpg', 'foto-autobedrijf.jpg'].map(img);
+---
+<div class={`@container relative ${cls}`} role="img" aria-label="Voorbeeld van een Instagram-profiel met een raster van foto's">
+  <div class="absolute bottom-[2.2%] left-[4.5%] right-[4.5%] top-[2.2%] overflow-hidden rounded-[11%/5.4%] bg-white">
+    <div class="grid gap-[3cqw] px-[5cqw] pb-[3cqw] pt-[17cqw]">
+      <div class="flex items-center gap-[4cqw]">
+        <span class="grid size-[17cqw] shrink-0 place-items-center rounded-full bg-gradient-to-br from-brand-400 to-brand-700 p-[0.8cqw]">
+          <span class="grid size-full place-items-center rounded-full bg-white">
+            <svg class="w-[45%]" viewBox="0 0 906 958" fill="var(--color-logo)"><path d="M0 0H386V410A386 410 0 0 1 0 0Z" /><rect x="520" width="386" height="410" /><path d="M386 548V958H0A386 410 0 0 1 386 548Z" /><rect x="520" y="548" width="386" height="410" /></svg>
+          </span>
+        </span>
+        <span class="grid flex-1 grid-cols-3 gap-[2cqw]">
+          {[0, 1, 2].map(() => (
+            <span class="grid justify-items-center gap-[1.4cqw]">
+              <span class="h-[2.6cqw] w-[70%] rounded-full bg-ink/80"></span>
+              <span class="h-[1.8cqw] w-full rounded-full bg-line"></span>
+            </span>
+          ))}
+        </span>
+      </div>
+      <span class="text-[4.4cqw] font-semibold leading-none text-ink">Jouw zaak</span>
+      <span class="grid gap-[1.4cqw]">
+        <span class="h-[1.8cqw] w-[85%] rounded-full bg-line"></span>
+        <span class="h-[1.8cqw] w-[60%] rounded-full bg-line"></span>
+      </span>
+      <span class="grid grid-cols-2 gap-[2cqw]">
+        <span class="rounded-[1.6cqw] bg-brand-600 py-[1.8cqw] text-center text-[3.4cqw] font-medium leading-none text-white">Volgen</span>
+        <span class="rounded-[1.6cqw] bg-surface-alt py-[1.8cqw] text-center text-[3.4cqw] font-medium leading-none text-ink ring-1 ring-line">Bericht</span>
+      </span>
+    </div>
+    <div class="grid grid-cols-3 gap-[0.6cqw]">
+      {fotos.map((f) => (
+        <Image src={f} alt="" widths={[120, 240]} sizes="80px" class="aspect-square w-full object-cover" />
+      ))}
+    </div>
+  </div>
+  <Image src={iphone} alt="" widths={[300, 600]} sizes="300px" class="pointer-events-none relative w-full" />
+</div>

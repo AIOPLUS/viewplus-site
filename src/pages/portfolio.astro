@@ -1,0 +1,80 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHero from '@/components/sections/PageHero.astro';
+import Feed from '@/components/mockups/Feed.astro';
+import CtaFinal from '@/components/sections/CtaFinal.astro';
+import { portfolio } from '@/config/content';
+import { breadcrumbSchema } from '@/lib/schema';
+import { img } from '@/lib/images';
+import { url } from '@/lib/url';
+---
+<BaseLayout
+  title="Portfolio: fotografie en content voor lokale ondernemers | View Plus"
+  description="Bekijk voorbeelden van de fotografie en content die View Plus maakt voor horeca, winkels, beauty en andere lokale ondernemers."
+  path="/portfolio"
+  page="portfolio"
+  noindex={portfolio.voorbeeld}
+  schemas={[breadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'Portfolio', path: '/portfolio' }])]}
+>
+  <PageHero line1="Ons" line2="werk" text="Beelden die de sfeer en uitstraling van een zaak vastleggen, en content die hem online tot leven brengt." compact />
+
+  <section class="pb-16 lg:pb-24" aria-labelledby="portfolio-title">
+    <div class="container-rp grid gap-8">
+      <h2 id="portfolio-title" class="sr-only">Foto’s</h2>
+      {portfolio.voorbeeld && (
+        <p class="mx-auto max-w-[760px] rounded-[var(--radius-card)] bg-amber-100 px-5 py-4 text-center text-sm text-amber-900">
+          <strong>Voorbeeldbeelden.</strong> Hier komt binnenkort ons eigen werk. De foto’s hieronder geven alvast een indruk van de stijl.
+        </p>
+      )}
+
+      <div class="flex flex-wrap justify-center gap-2" role="group" aria-label="Filter op branche" data-filters>
+        {['Alles', ...portfolio.categorieen].map((c, i) => (
+          <button type="button" data-filter={c} aria-pressed={i === 0 ? 'true' : 'false'} class="rounded-full border border-line bg-white px-5 py-2.5 text-[15px] text-ink transition-colors hover:border-brand-300 aria-pressed:border-brand-600 aria-pressed:bg-brand-100 aria-pressed:text-brand-600">{c}</button>
+        ))}
+      </div>
+
+      <ul class="columns-1 gap-4 sm:columns-2 lg:columns-3" data-grid>
+        {portfolio.items.map((p, i) => (
+          <li class="reveal group relative mb-4 break-inside-avoid overflow-hidden rounded-[var(--radius-panel)]" data-categorie={p.categorie}>
+            <Image src={img(p.foto)} alt={p.alt} widths={[420, 840]} sizes="(min-width: 1200px) 420px, (min-width: 640px) 50vw, 100vw" class:list={['w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]', i % 3 === 0 ? 'aspect-[4/5]' : i % 3 === 1 ? 'aspect-square' : 'aspect-[4/3]']} />
+            <span class="absolute bottom-3 left-3 rounded-full bg-white/90 px-3 py-1 text-xs font-medium text-ink backdrop-blur">{p.categorie}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="py-16 lg:py-24" aria-labelledby="feed-title">
+    <div class="container-rp grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
+      <div class="reveal relative isolate grid place-items-center overflow-hidden rounded-[var(--radius-panel)] bg-brand-100 px-8 pt-12">
+        <Feed class="w-[240px] translate-y-[8%] lg:w-[280px]" />
+      </div>
+      <div class="reveal grid gap-6">
+        <p class="eyebrow w-fit">Van shoot tot feed</p>
+        <h2 id="feed-title" class="heading-lg">Eén herkenbare stijl, van je eerste post tot je website</h2>
+        <p class="lead text-ink-soft">Met één shootdag maken we circa 40 bewerkte foto’s. Die vormen de basis voor 2 tot 3 maanden content, en je mag ze ook op je website gebruiken. Met grafische elementen in jouw stijl wordt je feed direct herkenbaar.</p>
+        <div class="flex flex-wrap gap-3">
+          <a href={url('/features#fotografie')} class="btn btn-soft">Over fotografie</a>
+          <a href={url('/plans')} class="btn btn-primary">Bekijk prijzen</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CtaFinal />
+</BaseLayout>
+
+<script>
+  // Filter op branche; zonder JavaScript zijn alle foto's zichtbaar.
+  const knoppen = document.querySelectorAll<HTMLButtonElement>('[data-filter]');
+  const items = document.querySelectorAll<HTMLElement>('[data-grid] > li');
+  knoppen.forEach((k) => k.addEventListener('click', () => {
+    const f = k.dataset.filter;
+    knoppen.forEach((o) => o.setAttribute('aria-pressed', String(o === k)));
+    items.forEach((li) => {
+      li.hidden = f !== 'Alles' && li.dataset.categorie !== f;
+      li.classList.add('is-visible');
+    });
+  }));
+</script>

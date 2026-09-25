@@ -1,0 +1,22 @@
+---
+/** Werkwijze in vier stappen, in de genummerde kaartstijl van "Over ons" op reviewplus.io. */
+import SectionHeader from '@/components/ui/SectionHeader.astro';
+import { werkwijze } from '@/config/content';
+---
+<section class="py-20 lg:py-28" aria-labelledby="werkwijze-title">
+  <div class="container-rp">
+    <SectionHeader id="werkwijze-title" eyebrow="Werkwijze" line1="Van concept" line2="naar content" class="reveal" />
+    <ol class="mt-14 grid gap-4 sm:grid-cols-2 lg:mt-20 lg:grid-cols-4">
+      {werkwijze.map((s, i) => (
+        <li class="soft-card reveal relative grid content-start gap-4 p-8">
+          <span class="text-[48px] font-light leading-none tracking-[-0.03em] text-brand-600" aria-hidden="true">0{i + 1}</span>
+          <h3 class="title">{s.titel}</h3>
+          <p class="body-muted">{s.tekst}</p>
+          {i < werkwijze.length - 1 && (
+            <svg class="absolute -right-3 top-12 hidden text-brand-300 lg:block" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+          )}
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>

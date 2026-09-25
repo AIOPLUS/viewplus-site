@@ -1,0 +1,41 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import HomeHero from '@/components/sections/HomeHero.astro';
+import AllInOne from '@/components/sections/AllInOne.astro';
+import FeatureBento from '@/components/sections/FeatureBento.astro';
+import Werkwijze from '@/components/sections/Werkwijze.astro';
+import Doelen from '@/components/sections/Doelen.astro';
+import PrijsKaarten from '@/components/sections/PrijsKaarten.astro';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
+import LabelBand from '@/components/sections/LabelBand.astro';
+import Faq from '@/components/sections/Faq.astro';
+import CtaFinal from '@/components/sections/CtaFinal.astro';
+import { faq } from '@/config/content';
+import { faqSchema, serviceSchema, websiteSchema } from '@/lib/schema';
+import { url } from '@/lib/url';
+---
+<BaseLayout
+  title="View Plus – social media management en fotografie voor lokale ondernemers"
+  description="Van concept naar content: View Plus neemt je social media uit handen, met professionele fotografie, een contentkalender en actief beheer. Social media management voor € 75 per week."
+  path="/"
+  page="home"
+  schemas={[websiteSchema(), serviceSchema(), faqSchema(faq)]}
+>
+  <HomeHero />
+  <AllInOne />
+  <FeatureBento />
+  <Werkwijze />
+  <Doelen />
+
+  <section class="py-20 lg:py-28" aria-labelledby="prijzen-title">
+    <div class="container-rp">
+      <SectionHeader id="prijzen-title" eyebrow="Prijzen" line1="Heldere" line2="prijzen" class="reveal" />
+      <div class="mt-14 lg:mt-20"><PrijsKaarten /></div>
+      <p class="mt-8 text-center text-ink-soft">Alle prijzen exclusief btw. <a href={url('/plans')} class="text-brand-600 underline">Bekijk alle details en uitbreidingen</a></p>
+    </div>
+  </section>
+
+  <LabelBand />
+  <Faq items={faq} />
+  <CtaFinal />
+</BaseLayout>

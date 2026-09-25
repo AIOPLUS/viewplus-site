@@ -1,0 +1,26 @@
+---
+/** Stapel foto's van een shootdag, met een label "circa 40 bewerkte foto's": illustratie. */
+import { Image } from 'astro:assets';
+import { img } from '@/lib/images';
+
+interface Props {
+  class?: string;
+}
+const { class: cls = '' } = Astro.props;
+const stapel = [
+  { src: img('foto-salon.jpg'), stijl: '-rotate-[8deg] -translate-x-[18%] translate-y-[6%]' },
+  { src: img('foto-winkel.jpg'), stijl: 'rotate-[7deg] translate-x-[18%] translate-y-[3%]' },
+  { src: img('foto-restaurant.jpg'), stijl: '-rotate-1' },
+];
+---
+<div class={`relative grid place-items-center ${cls}`} role="img" aria-label="Voorbeeld van foto's van een shootdag">
+  {stapel.map((f) => (
+    <div class={`col-start-1 row-start-1 w-[62%] rounded-xl bg-white p-[2.5%] shadow-[var(--shadow-card)] ${f.stijl}`}>
+      <Image src={f.src} alt="" widths={[320, 640]} sizes="(min-width: 1200px) 320px, 60vw" class="aspect-[4/3] w-full rounded-lg object-cover" />
+    </div>
+  ))}
+  <span class="absolute bottom-[6%] right-[6%] flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-medium text-ink shadow-[var(--shadow-card)]">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-brand-600)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3z" /><circle cx="12" cy="13" r="3" /></svg>
+    ± 40 bewerkte foto’s
+  </span>
+</div>

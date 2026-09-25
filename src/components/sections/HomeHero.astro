@@ -1,0 +1,57 @@
+---
+import { Image } from 'astro:assets';
+import ArrowButton from '@/components/ui/ArrowButton.astro';
+import PlatformBand from './PlatformBand.astro';
+import { prijzen } from '@/config/content';
+import { url } from '@/lib/url';
+import restaurant from '@/assets/img/foto-restaurant.jpg';
+import salon from '@/assets/img/foto-salon.jpg';
+import winkel from '@/assets/img/foto-winkel.jpg';
+import patroon1 from '@/assets/img/patroon-1.svg';
+import patroon2 from '@/assets/img/patroon-2.svg';
+
+const fotos = [restaurant, winkel, salon];
+const social = prijzen[0];
+---
+<section class="relative pt-[140px] lg:pt-[184px]" aria-labelledby="hero-title">
+  <Image src={patroon1} alt="" class="pointer-events-none absolute left-[26%] top-[110px] hidden w-[240px] opacity-80 lg:block" loading="eager" />
+  <Image src={patroon2} alt="" class="pointer-events-none absolute right-[22%] top-[300px] hidden w-[240px] opacity-80 lg:block" loading="eager" />
+
+  <div class="container-rp relative">
+    <div class="grid gap-10 lg:grid-cols-[1fr_300px] lg:items-start">
+      <div class="grid gap-10">
+        <h1 id="hero-title" class="display text-ink">
+          <span class="block">Van concept</span>
+          <span class="block">naar</span>
+          <span class="flex items-center gap-4 text-brand-600">
+            <span class="hidden h-px w-[72px] bg-line-strong sm:block lg:w-[120px]" aria-hidden="true"></span>content
+          </span>
+        </h1>
+        <div class="flex flex-wrap items-center gap-3">
+          <ArrowButton href={url('/contact')} label="Plan een kennismaking" track="kennismaking_klik" class="w-fit" />
+          <a href={url('/plans')} class="btn btn-white border-line text-ink hover:border-brand-200">Bekijk prijzen</a>
+        </div>
+      </div>
+
+      <div class="grid gap-8 lg:pt-4">
+        <svg width="34" height="34" viewBox="0 0 34 34" fill="none" stroke="var(--color-brand-400)" stroke-width="1.5" aria-hidden="true" class="hidden lg:block"><path d="M17 0v34M0 17h34" /></svg>
+        <p class="lead text-ink">Vergroot je online zichtbaarheid. Professionele fotografie, sterke content en actief beheer van je social media, zodat jij je kunt focussen op je zaak.</p>
+        <div class="grid gap-2">
+          <div class="flex items-center gap-4">
+            <div class="flex -space-x-2.5">
+              {fotos.map((img) => (
+                <Image src={img} alt="" width={40} height={40} class="size-10 rounded-full border-2 border-white object-cover" loading="eager" />
+              ))}
+            </div>
+            <p class="text-[40px] font-normal leading-none tracking-[-0.03em] text-ink">€ {social.bedrag}</p>
+          </div>
+          <p class="max-w-[260px] text-sm text-muted">Per week, exclusief btw. Je social media volledig uit handen.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-rp mt-12 lg:mt-16">
+    <PlatformBand />
+  </div>
+</section>

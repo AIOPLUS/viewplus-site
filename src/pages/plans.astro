@@ -1,0 +1,60 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHero from '@/components/sections/PageHero.astro';
+import PrijsKaarten from '@/components/sections/PrijsKaarten.astro';
+import Faq from '@/components/sections/Faq.astro';
+import LabelBand from '@/components/sections/LabelBand.astro';
+import CtaFinal from '@/components/sections/CtaFinal.astro';
+import { uitbreidingen } from '@/config/content';
+import { breadcrumbSchema, faqSchema, serviceSchema } from '@/lib/schema';
+import { iconen } from '@/lib/iconen';
+import { url } from '@/lib/url';
+
+const prijsFaq = [
+  { vraag: 'Zijn de prijzen inclusief btw?', antwoord: 'Nee, de prijzen zijn exclusief btw. Bij elke dienst staat ook het bedrag inclusief 21% btw.' },
+  { vraag: 'Heb ik een shootdag nodig voor social media management?', antwoord: 'Voor de content gebruiken we professioneel beeldmateriaal. Een shootdag levert circa 40 bewerkte foto’s op, genoeg voor ongeveer 2 tot 3 maanden content. In de kennismaking kijken we samen wat voor jouw zaak nodig is.' },
+  { vraag: 'Hoe vaak plannen we een nieuwe shootdag?', antwoord: 'Het is goed om regelmatig nieuw beeld te maken, zodat je content actueel blijft. Bijvoorbeeld als je kaart of collectie met het seizoen verandert.' },
+  { vraag: 'Wat kost video?', antwoord: 'Videomateriaal is een uitbreiding. De prijs hangt af van wat je nodig hebt; vraag er gerust naar in de kennismaking.' },
+];
+---
+<BaseLayout
+  title="Prijzen: social media management voor € 75 per week | View Plus"
+  description="Social media management voor € 75 per week en een shootdag voor € 475, exclusief btw. Bekijk wat er precies bij zit en welke uitbreidingen er zijn."
+  path="/plans"
+  page="prijzen"
+  schemas={[serviceSchema(), faqSchema(prijsFaq), breadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'Prijzen', path: '/plans' }])]}
+>
+  <PageHero line1="Onze" line2="prijzen" text="Helder en zonder verrassingen. Je social media uit handen voor een vast bedrag per week, en professionele foto’s per shootdag." compact />
+
+  <section class="pb-20 lg:pb-28" aria-label="Prijzen">
+    <div class="container-rp">
+      <PrijsKaarten kop="h2" />
+      <p class="mt-8 text-center text-ink-soft">Twijfel je wat je nodig hebt? <a href={url('/contact')} class="text-brand-600 underline">Plan een vrijblijvende kennismaking</a>.</p>
+    </div>
+  </section>
+
+  <section class="pb-20 lg:pb-28" aria-labelledby="uitbreidingen-title">
+    <div class="container-rp">
+      <h2 id="uitbreidingen-title" class="display reveal text-center"><span class="text-ink">Uitbreidingen</span> <span class="text-brand-600">op maat</span></h2>
+      <ul class="mx-auto mt-12 grid max-w-[960px] gap-4 md:grid-cols-2">
+        {uitbreidingen.map((u) => (
+          <li class="card reveal relative flex items-start gap-4 p-6">
+            <span class="grid size-12 shrink-0 place-items-center rounded-xl bg-brand-100 text-brand-600" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d={iconen[u.icoon]} /></svg>
+            </span>
+            <div>
+              <h3 class="text-lg font-medium text-ink">
+                {'href' in u ? <a href={u.href} class="after:absolute after:inset-0 hover:text-brand-600">{u.titel}</a> : u.titel}
+              </h3>
+              <p class="body-muted mt-1">{u.tekst}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <Faq items={prijsFaq} line1="Vragen over" line2="de prijzen" />
+  <LabelBand />
+  <CtaFinal />
+</BaseLayout>

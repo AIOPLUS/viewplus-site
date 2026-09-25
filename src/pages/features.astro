@@ -1,0 +1,47 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHero from '@/components/sections/PageHero.astro';
+import Diensten from '@/components/sections/Diensten.astro';
+import Werkwijze from '@/components/sections/Werkwijze.astro';
+import CtaFinal from '@/components/sections/CtaFinal.astro';
+import { uitbreidingen } from '@/config/content';
+import { iconen } from '@/lib/iconen';
+import { breadcrumbSchema, serviceSchema } from '@/lib/schema';
+---
+<BaseLayout
+  title="Diensten: social media management, fotografie en content | View Plus"
+  description="Wat View Plus voor je doet: een contentkalender, 2 tot 3 posts per week met captions en hashtags, professionele fotografie, grafische elementen en actief reageren op je doelgroep."
+  path="/features"
+  page="diensten"
+  schemas={[serviceSchema(), breadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'Diensten', path: '/features' }])]}
+>
+  <PageHero line1="Onze" line2="diensten" text="Professionele fotografie, sterke content en actief beheer. Samen zorgen we voor een consistente online uitstraling die past bij jouw zaak." />
+  <Diensten />
+  <Werkwijze />
+
+  <section class="py-20 lg:py-28" aria-labelledby="uitbreidingen-title">
+    <div class="container-rp">
+      <div class="reveal grid justify-items-center gap-5 text-center">
+        <p class="eyebrow">Uitbreidingen</p>
+        <h2 id="uitbreidingen-title" class="display"><span class="block">Nog meer</span><span class="block text-brand-600">mogelijkheden</span></h2>
+      </div>
+      <ul class="mx-auto mt-12 grid max-w-[960px] gap-4 md:grid-cols-2 lg:mt-16">
+        {uitbreidingen.map((u) => (
+          <li class="soft-card reveal relative flex items-start gap-4 p-6">
+            <span class="grid size-12 shrink-0 place-items-center rounded-xl bg-brand-100 text-brand-600" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d={iconen[u.icoon]} /></svg>
+            </span>
+            <div>
+              <h3 class="text-lg font-medium text-ink">
+                {'href' in u ? <a href={u.href} class="after:absolute after:inset-0 hover:text-brand-600">{u.titel}</a> : u.titel}
+              </h3>
+              <p class="body-muted mt-1">{u.tekst}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <CtaFinal />
+</BaseLayout>

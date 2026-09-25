@@ -1,0 +1,49 @@
+---
+/**
+ * Doelen van View Plus in dezelfde "pil"-opmaak als de statistieken op reviewplus.io.
+ * Bewust zonder percentages: die voegen we pas toe als ze onderbouwd zijn.
+ */
+import SectionHeader from '@/components/ui/SectionHeader.astro';
+import { doelen } from '@/config/content';
+import { iconen } from '@/lib/iconen';
+
+const [bereik, doelgroep, betrokkenheid] = doelen;
+---
+<section class="py-20 lg:py-28" aria-labelledby="doelen-title">
+  <div class="container-rp">
+    <SectionHeader id="doelen-title" eyebrow="Het doel" line1="Meer zichtbaarheid" line2="voor jouw zaak" class="reveal" />
+
+    <div class="reveal mt-14 grid gap-4 lg:mt-20">
+      <div class="grid gap-4 md:grid-cols-[1fr_2fr_1fr]">
+        <div class="hidden items-center justify-center gap-6 rounded-full border border-line md:flex" aria-hidden="true">{[0, 1, 2].map(() => <svg width="40" height="40" viewBox="0 0 40 40" stroke="var(--color-line-strong)" stroke-width="1"><path d="m4 4 32 32M36 4 4 36" /></svg>)}</div>
+        <div class="flex items-center gap-5 rounded-full bg-brand-100 px-8 py-8 lg:px-12">
+          <svg class="shrink-0" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="var(--color-brand-600)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={iconen.bereik} /></svg>
+          <div class="grid gap-1">
+            <h3 class="text-[26px] font-normal leading-tight tracking-[-0.02em] text-brand-600 lg:text-[34px]">{bereik.titel}</h3>
+            <p class="text-sm text-ink-soft">{bereik.tekst}</p>
+          </div>
+        </div>
+        <div class="hidden items-center justify-center gap-6 rounded-full border border-line md:flex" aria-hidden="true">{[0, 1, 2].map(() => <svg width="40" height="40" viewBox="0 0 40 40" stroke="var(--color-line-strong)" stroke-width="1"><path d="m4 4 32 32M36 4 4 36" /></svg>)}</div>
+      </div>
+      <div class="grid gap-4 md:grid-cols-[2fr_.5fr_2fr]">
+        <div class="flex items-center gap-5 rounded-full bg-brand-100 px-8 py-8 lg:px-12">
+          <svg class="shrink-0" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--color-brand-600)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={iconen.doel} /></svg>
+          <div class="grid gap-1">
+            <h3 class="text-[26px] font-normal leading-tight tracking-[-0.02em] text-brand-600 lg:text-[34px]">{doelgroep.titel}</h3>
+            <p class="text-sm text-ink-soft">{doelgroep.tekst}</p>
+          </div>
+        </div>
+        <div class="hidden place-items-center rounded-full border border-line md:grid" aria-hidden="true">
+          <svg width="40" height="40" viewBox="0 0 40 40" stroke="var(--color-line-strong)" stroke-width="1"><path d="M20 2v36M2 20h36" /></svg>
+        </div>
+        <div class="flex items-center gap-5 rounded-full bg-gradient-to-r from-brand-600 to-brand-400 px-8 py-8 text-white lg:px-12">
+          <svg class="shrink-0" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={iconen.hart} /></svg>
+          <div class="grid gap-1">
+            <h3 class="text-[26px] font-normal leading-tight tracking-[-0.02em] lg:text-[34px]">{betrokkenheid.titel}</h3>
+            <p class="text-sm text-white/90">{betrokkenheid.tekst}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
