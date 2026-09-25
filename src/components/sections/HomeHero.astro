@@ -2,7 +2,7 @@
 import { Image } from 'astro:assets';
 import ArrowButton from '@/components/ui/ArrowButton.astro';
 import PlatformBand from './PlatformBand.astro';
-import { prijzen } from '@/config/content';
+import { vanaf } from '@/config/content';
 import { url } from '@/lib/url';
 import restaurant from '@/assets/img/foto-restaurant.jpg';
 import salon from '@/assets/img/foto-salon.jpg';
@@ -11,7 +11,7 @@ import patroon1 from '@/assets/img/patroon-1.svg';
 import patroon2 from '@/assets/img/patroon-2.svg';
 
 const fotos = [restaurant, winkel, salon];
-const social = prijzen[0];
+const vanafOnline = vanaf('online');
 ---
 <section class="relative pt-[140px] lg:pt-[184px]" aria-labelledby="hero-title">
   <Image src={patroon1} alt="" class="pointer-events-none absolute left-[26%] top-[110px] hidden w-[240px] opacity-80 lg:block" loading="eager" />
@@ -43,9 +43,9 @@ const social = prijzen[0];
                 <Image src={img} alt="" width={40} height={40} class="size-10 rounded-full border-2 border-white object-cover" loading="eager" />
               ))}
             </div>
-            <p class="text-[40px] font-normal leading-none tracking-[-0.03em] text-ink">€ {social.bedrag}</p>
+            <p class="text-[40px] font-normal leading-none tracking-[-0.03em] text-ink">€ {vanafOnline}</p>
           </div>
-          <p class="max-w-[260px] text-sm text-muted">Per week, exclusief btw. Je social media volledig uit handen.</p>
+          <p class="max-w-[260px] text-sm text-muted">Per week bij 12 maanden View Plus Online, exclusief btw. Je social media volledig uit handen.</p>
         </div>
       </div>
     </div>

@@ -90,18 +90,32 @@ export const portfolio = {
 } as const;
 
 /**
- * Prijzen, exclusief btw (zoals in de brochure). De bedragen incl. 21% btw rekent src/lib/prijs.ts uit.
- * TODO Jordan: geldt € 75 per week voor alle platformen samen of per platform? Is er een minimale looptijd of opzegtermijn?
+ * Prijzen per dienst, exclusief btw. Elke dienst heeft drie opties, zoals de drie plannen op reviewplus.io.
+ * `bedrag` = prijs per eenheid (week of shootdag); `aantal` = aantal eenheden in de looptijd (voor het totaal).
+ * De bedragen incl. 21% btw rekent src/lib/prijs.ts uit.
+ * TODO Jordan: geldt View Plus Online voor alle platformen samen of per platform? Opzegtermijn na de looptijd?
  */
-export const prijzen = [
+export type PrijsOptie = { id: string; label: string; looptijd: string; aantal: number; bedrag: number; uitgelicht?: boolean };
+export type Pakket = {
+  id: string;
+  naam: string;
+  ondertitel: string;
+  eenheid: string;
+  eenheidKort: string;
+  /** Tekst na het totaalbedrag, bv. "in totaal" of "per jaar". */
+  totaalTekst: string;
+  kenmerken: readonly string[];
+  opties: readonly PrijsOptie[];
+};
+
+export const pakketten: readonly Pakket[] = [
   {
-    id: 'social-media',
-    naam: 'Social media management',
-    bedrag: '75',
-    per: 'week',
-    perKort: '/week',
-    label: 'Doorlopend',
-    uitgelicht: true,
+    id: 'online',
+    naam: 'View Plus Online',
+    ondertitel: 'Social media management',
+    eenheid: 'week',
+    eenheidKort: '/week',
+    totaalTekst: 'in totaal',
     kenmerken: [
       'Contentkalender vooraf',
       'Drie vaste contentpijlers, samen bepaald',
@@ -110,26 +124,36 @@ export const prijzen = [
       'Reageren op alle reacties',
       'Actief interactie met relevante accounts',
     ],
-    knop: 'Start met social media',
+    opties: [
+      { id: 'online-1-maand', label: '1 maand', looptijd: '4 weken', aantal: 4, bedrag: 75 },
+      { id: 'online-3-maanden', label: '3 maanden', looptijd: '12 weken', aantal: 12, bedrag: 50 },
+      { id: 'online-12-maanden', label: '12 maanden', looptijd: '52 weken', aantal: 52, bedrag: 25, uitgelicht: true },
+    ],
   },
   {
-    id: 'shootdag',
-    naam: 'Shootdag',
-    bedrag: '475',
-    per: 'shootdag',
-    perKort: '/shootdag',
-    label: 'Fotografie',
-    uitgelicht: false,
+    id: 'fotografie',
+    naam: 'Fotografie',
+    ondertitel: 'Shootdagen',
+    eenheid: 'shootdag',
+    eenheidKort: '/shoot',
+    totaalTekst: 'per jaar',
     kenmerken: [
       'Ongeveer 2 uur fotograferen op locatie',
-      'Circa 40 bewerkte foto’s',
+      'Circa 40 bewerkte foto’s per shootdag',
       'Vrij te gebruiken voor social media en je website',
-      'Genoeg voor ongeveer 2 tot 3 maanden content',
+      'Eén shootdag is genoeg voor ongeveer 2 tot 3 maanden content',
       'Grafische elementen voor een herkenbare stijl',
     ],
-    knop: 'Plan een shootdag',
+    opties: [
+      { id: 'fotografie-1-shoot', label: '1 shoot per jaar', looptijd: '1 shootdag per jaar', aantal: 1, bedrag: 475 },
+      { id: 'fotografie-2-shoots', label: '2 shoots per jaar', looptijd: '2 shootdagen per jaar', aantal: 2, bedrag: 375 },
+      { id: 'fotografie-4-shoots', label: '4 shoots per jaar', looptijd: '4 shootdagen per jaar', aantal: 4, bedrag: 275, uitgelicht: true },
+    ],
   },
-] as const;
+];
+
+/** Laagste prijs per eenheid van een pakket (voor "vanaf"-teksten). */
+export const vanaf = (id: string): number => Math.min(...(pakketten.find((p) => p.id === id)?.opties.map((o) => o.bedrag) ?? [0]));
 
 /** Uitbreidingen (prijs op aanvraag). */
 export const uitbreidingen = [
@@ -154,8 +178,8 @@ export const faq = [
     antwoord: 'View Plus neemt je social media uit handen. We fotograferen jouw zaak, maken een contentkalender, plaatsen 2 tot 3 posts per week met captions en hashtags, en reageren op alle reacties. Zo krijg je een consistente en herkenbare online uitstraling, zonder dat je er zelf tijd in hoeft te steken.',
   },
   {
-    vraag: 'Wat kost social media management?',
-    antwoord: 'Social media management kost € 75 per week, exclusief btw. Een shootdag kost € 475, exclusief btw. Op de prijzenpagina zie je precies wat erbij zit.',
+    vraag: 'Wat kost View Plus?',
+    antwoord: 'View Plus Online kost € 75 per week bij 1 maand, € 50 per week bij 3 maanden en € 25 per week bij 12 maanden. Een shootdag kost € 475 bij 1 shoot per jaar, € 375 per shoot bij 2 shoots en € 275 per shoot bij 4 shoots per jaar. Alle prijzen zijn exclusief btw.',
   },
   {
     vraag: 'Mag ik de foto’s ook op mijn website gebruiken?',

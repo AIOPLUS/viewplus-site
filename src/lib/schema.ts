@@ -1,5 +1,5 @@
 import { brand } from '@/config/brand';
-import { prijzen } from '@/config/content';
+import { pakketten } from '@/config/content';
 import { absoluteUrl } from './url';
 
 type Json = Record<string, unknown>;
@@ -67,19 +67,21 @@ export function serviceSchema(): Json {
     serviceType: 'Social media management',
     provider: { '@id': orgId },
     url: absoluteUrl('/features'),
-    offers: prijzen.map((p) => ({
-      '@type': 'Offer',
-      name: p.naam,
-      price: p.bedrag,
-      priceCurrency: 'EUR',
-      url: absoluteUrl('/plans'),
-      priceSpecification: {
-        '@type': 'UnitPriceSpecification',
-        price: p.bedrag,
+    offers: pakketten.flatMap((p) =>
+      p.opties.map((o) => ({
+        '@type': 'Offer',
+        name: `${p.naam} (${o.label})`,
+        price: o.bedrag,
         priceCurrency: 'EUR',
-        ...(p.per === 'week' ? { unitCode: 'WEE' } : { unitText: p.per }),
-        valueAddedTaxIncluded: false,
-      },
-    })),
+        url: absoluteUrl('/plans'),
+        priceSpecification: {
+          '@type': 'UnitPriceSpecification',
+          price: o.bedrag,
+          priceCurrency: 'EUR',
+          ...(p.eenheid === 'week' ? { unitCode: 'WEE' } : { unitText: p.eenheid }),
+          valueAddedTaxIncluded: false,
+        },
+      })),
+    ),
   };
 }

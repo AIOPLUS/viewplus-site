@@ -1,9 +1,9 @@
 import type { APIRoute } from 'astro';
 import { getCollection } from 'astro:content';
 import { brand, labels } from '@/config/brand';
-import { diensten, faq, prijzen, uitbreidingen } from '@/config/content';
+import { diensten, faq, pakketten, uitbreidingen } from '@/config/content';
 import { absoluteUrl } from '@/lib/url';
-import { inclBtwTekst } from '@/lib/prijs';
+import { euro, inclBtwTekst } from '@/lib/prijs';
 
 /** Samenvatting van de site voor AI-assistenten (llmstxt.org). */
 export const GET: APIRoute = async () => {
@@ -19,7 +19,12 @@ export const GET: APIRoute = async () => {
     ...uitbreidingen.map((u) => `- ${u.titel}: ${u.tekst}`),
     '',
     '## Prijzen (exclusief btw)',
-    ...prijzen.map((p) => `- ${p.naam}: € ${p.bedrag} per ${p.per} (€ ${inclBtwTekst(p.bedrag)} incl. 21% btw). ${p.kenmerken.join('; ')}.`),
+    ...pakketten.flatMap((p) => [
+      `### ${p.naam} (${p.ondertitel.toLowerCase()})`,
+      ...p.opties.map((o) => `- ${o.label}: € ${euro(o.bedrag)} per ${p.eenheid} (€ ${inclBtwTekst(o.bedrag)} incl. 21% btw); ${o.looptijd}, € ${euro(o.aantal * o.bedrag)} ${p.totaalTekst}.`),
+      `Inbegrepen: ${p.kenmerken.join('; ')}.`,
+      '',
+    ]),
     '',
     "## Pagina's",
     `- [Diensten](${absoluteUrl('/features')})`,

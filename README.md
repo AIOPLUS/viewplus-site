@@ -25,7 +25,7 @@ De site van View Plus: social media management, fotografie en content voor lokal
 
 ## Teksten aanpassen
 
-- Pijlers, diensten, werkwijze, doelen, prijzen, FAQ, portfolio: `src/config/content.ts`
+- Pijlers, diensten, werkwijze, doelen, prijzen (`pakketten`: View Plus Online en Fotografie, elk drie opties), FAQ, portfolio: `src/config/content.ts`
 - Menu, footer, labels, e-mail, socials: `src/config/brand.ts`
 - Nieuw kennisbankartikel: maak `src/content/articles/<slug>.md` (velden: zie `src/content.config.ts`)
 - Nieuwe vacature: maak `src/content/jobs/<slug>.md`; `concept: true` = alleen op de testversie
@@ -70,6 +70,6 @@ npm run check    # typecheck + lint + build + linkcheck
 ## Nog te doen (Jordan)
 
 - E-mailadres kiezen (`brand.email`, nu support@reviewplus.io) en juridische naam invullen.
-- Geldt € 75 per week voor alle platformen of per platform? Minimale looptijd of opzegtermijn?
+- Geldt View Plus Online voor alle platformen samen of per platform? Wat gebeurt er na afloop van de looptijd (verlenging, opzegtermijn)?
 - Eigen verhaal op Over ons, echte social-mediaprofielen, eigen foto's en portfolio.
 - Algemene voorwaarden opstellen; privacyverklaring laten controleren (staat als concept).

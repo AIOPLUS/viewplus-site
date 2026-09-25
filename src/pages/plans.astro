@@ -11,20 +11,22 @@ import { iconen } from '@/lib/iconen';
 import { url } from '@/lib/url';
 
 const prijsFaq = [
-  { vraag: 'Zijn de prijzen inclusief btw?', antwoord: 'Nee, de prijzen zijn exclusief btw. Bij elke dienst staat ook het bedrag inclusief 21% btw.' },
+  { vraag: 'Zijn de prijzen inclusief btw?', antwoord: 'Nee, de prijzen zijn exclusief btw. Bij elke optie staat ook het bedrag inclusief 21% btw.' },
+  { vraag: 'Welke looptijden zijn er voor View Plus Online?', antwoord: 'Je kiest uit 1 maand (4 weken) voor € 75 per week, 3 maanden (12 weken) voor € 50 per week of 12 maanden (52 weken) voor € 25 per week. Hoe langer de looptijd, hoe lager de prijs per week.' },
+  { vraag: 'Hoe werken de prijzen voor fotografie?', antwoord: 'Hoe vaker we per jaar fotograferen, hoe lager de prijs per shootdag: € 475 bij 1 shoot per jaar, € 375 per shoot bij 2 shoots en € 275 per shoot bij 4 shoots per jaar. Met 4 shoots per jaar heb je elk seizoen nieuw beeld.' },
   { vraag: 'Heb ik een shootdag nodig voor social media management?', antwoord: 'Voor de content gebruiken we professioneel beeldmateriaal. Een shootdag levert circa 40 bewerkte foto’s op, genoeg voor ongeveer 2 tot 3 maanden content. In de kennismaking kijken we samen wat voor jouw zaak nodig is.' },
   { vraag: 'Hoe vaak plannen we een nieuwe shootdag?', antwoord: 'Het is goed om regelmatig nieuw beeld te maken, zodat je content actueel blijft. Bijvoorbeeld als je kaart of collectie met het seizoen verandert.' },
   { vraag: 'Wat kost video?', antwoord: 'Videomateriaal is een uitbreiding. De prijs hangt af van wat je nodig hebt; vraag er gerust naar in de kennismaking.' },
 ];
 ---
 <BaseLayout
-  title="Prijzen: social media management voor € 75 per week | View Plus"
-  description="Social media management voor € 75 per week en een shootdag voor € 475, exclusief btw. Bekijk wat er precies bij zit en welke uitbreidingen er zijn."
+  title="Prijzen: social media management vanaf € 25 per week | View Plus"
+  description="View Plus Online (social media management) vanaf € 25 per week en fotografie vanaf € 275 per shootdag, exclusief btw. Kies 1, 3 of 12 maanden, of 1, 2 of 4 shoots per jaar."
   path="/plans"
   page="prijzen"
   schemas={[serviceSchema(), faqSchema(prijsFaq), breadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'Prijzen', path: '/plans' }])]}
 >
-  <PageHero line1="Onze" line2="prijzen" text="Helder en zonder verrassingen. Je social media uit handen voor een vast bedrag per week, en professionele foto’s per shootdag." compact />
+  <PageHero line1="Onze" line2="prijzen" text="Hoe langer je kiest, hoe voordeliger. Je social media uit handen voor een vast bedrag per week, en professionele foto’s per shootdag." compact />
 
   <section class="pb-20 lg:pb-28" aria-label="Prijzen">
     <div class="container-rp">
