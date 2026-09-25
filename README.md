@@ -58,8 +58,9 @@ npm run check    # typecheck + lint + build + linkcheck
 2. GitHub-variabelen: `SITE_URL=https://www.viewplus.io`, `BASE_PATH=/`.
 3. GitHub → Settings → Pages → Custom domain `www.viewplus.io` → Enforce HTTPS zodra het certificaat er is.
 4. DNS bij GoDaddy: A-records van `viewplus.io` (@) naar 185.199.108.153, .109.153, .110.153, .111.153 en `www` als CNAME naar `aioplus.github.io`.
-5. Cloudflare Turnstile: `www.viewplus.io` en `viewplus.io` als hostname toevoegen.
-6. In `reviewplus-site`: de labelschakelaar live zetten (zie de branch `labelschakelaar`).
+5. Controleer dat support@viewplus.io mail ontvangt.
+6. Cloudflare Turnstile: `www.viewplus.io` en `viewplus.io` als hostname toevoegen.
+7. In `reviewplus-site`: de labelschakelaar live zetten (zie de branch `labelschakelaar`).
 
 ## Beelden
 
@@ -69,7 +70,7 @@ npm run check    # typecheck + lint + build + linkcheck
 
 ## Nog te doen (Jordan)
 
-- E-mailadres kiezen (`brand.email`, nu support@reviewplus.io) en juridische naam invullen.
+- Mailbox support@viewplus.io activeren (staat al op de site in `brand.email`, maar is nog niet actief) en juridische naam invullen.
 - Geldt View Plus Online voor alle platformen samen of per platform? Wat gebeurt er na afloop van de looptijd (verlenging, opzegtermijn)?
 - Eigen verhaal op Over ons, echte social-mediaprofielen, eigen foto's en portfolio.
 - Algemene voorwaarden opstellen; privacyverklaring laten controleren (staat als concept).

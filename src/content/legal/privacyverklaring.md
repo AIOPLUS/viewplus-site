@@ -28,7 +28,7 @@ View Plus is verwerkingsverantwoordelijke voor de verwerking van persoonsgegeven
 
 Contactgegevens:
 
-- E-mail: support@reviewplus.io
+- E-mail: support@viewplus.io
 - Website: viewplus.io
 
 ## 3. Welke persoonsgegevens worden verwerkt?
@@ -92,7 +92,7 @@ Gegevens worden in beginsel binnen de Europese Economische Ruimte (EER) verwerkt
 
 ## 9. Rechten van betrokkenen
 
-Je hebt het recht op inzage, rectificatie, verwijdering, beperking van verwerking, dataportabiliteit en bezwaar tegen verwerking. Verzoeken kun je sturen naar support@reviewplus.io. We kunnen om identificatie vragen voordat we een verzoek in behandeling nemen.
+Je hebt het recht op inzage, rectificatie, verwijdering, beperking van verwerking, dataportabiliteit en bezwaar tegen verwerking. Verzoeken kun je sturen naar support@viewplus.io. We kunnen om identificatie vragen voordat we een verzoek in behandeling nemen.
 
 Ben je het niet eens met hoe we met je gegevens omgaan, dan kun je een klacht indienen bij de Autoriteit Persoonsgegevens.
 

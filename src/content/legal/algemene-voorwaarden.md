@@ -12,4 +12,4 @@ Tot die tijd leggen we de afspraken voor elke opdracht vast in het voorstel dat 
 
 ## Vragen
 
-Heb je vragen over onze voorwaarden? Mail naar support@reviewplus.io.
+Heb je vragen over onze voorwaarden? Mail naar support@viewplus.io.

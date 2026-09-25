@@ -10,8 +10,8 @@ export const brand = {
   shopUrl: '',
   /** Eigen app (later). Leeg = geen "Inloggen". */
   appLoginUrl: '',
-  // TODO Jordan: definitief e-mailadres kiezen (bijvoorbeeld info@viewplus.io zodra die mailbox bestaat).
-  email: 'support@reviewplus.io',
+  // LET OP: deze mailbox is nog niet actief (25-09-2026). Activeer hem vóór de livegang.
+  email: 'support@viewplus.io',
   /** Rasterlogo voor schema.org/Google (min. 112px). Icoon zelf: components/layout/Logo.astro */
   logo: '/assets/brand/logo-512.png',
   /** Kleur van de adresbalk op telefoons (= brand-600). */
