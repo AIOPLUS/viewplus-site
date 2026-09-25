@@ -6,8 +6,11 @@ export const brand = {
   name: 'View Plus',
   legalName: 'View Plus', // TODO Jordan: juridische naam (zoals in KvK) invullen.
   siteUrl: 'https://www.viewplus.io',
-  /** Webshop (reseller van o.a. Smiirl-tellers). Leeg = geen "Shop" in menu en footer. */
-  shopUrl: '',
+  /**
+   * Webshop (live tellers en NFC-volgstandaards). Uit de GitHub-variabele PUBLIC_SHOP_URL:
+   * testversie https://aioplus.github.io/viewplus-shop, live https://shop.viewplus.io. Leeg = geen "Shop" in menu en footer.
+   */
+  shopUrl: (import.meta.env.PUBLIC_SHOP_URL || '').replace(/\/+$/, ''),
   /** Eigen app (later). Leeg = geen "Inloggen". */
   appLoginUrl: '',
   // LET OP: deze mailbox is nog niet actief (25-09-2026). Activeer hem vóór de livegang.

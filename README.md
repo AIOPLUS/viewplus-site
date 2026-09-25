@@ -58,6 +58,7 @@ npm run check    # typecheck + lint + build + linkcheck
 | `SITE_URL` | leeg (= `https://aioplus.github.io`) | `https://www.viewplus.io` |
 | `BASE_PATH` | leeg (= `/viewplus-site`) | `/` |
 | `PUBLIC_LEAD_WEBHOOK_URL` | leeg (later Make) | idem |
+| `PUBLIC_SHOP_URL` | `https://aioplus.github.io/viewplus-shop` | `https://shop.viewplus.io` |
 | `PUBLIC_TURNSTILE_SITE_KEY` | leeg (later) | idem |
 | `PUBLIC_ANALYTICS_PROVIDER` / `PUBLIC_UMAMI_WEBSITE_ID` | leeg | Umami |
 
