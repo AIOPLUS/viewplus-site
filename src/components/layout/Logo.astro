@@ -1,19 +1,19 @@
 ---
 /**
  * View Plus-logo: hetzelfde beeldmerk als Review Plus (links twee kwart-ellipsen, rechts twee vierkanten), in paars.
- * Woordmerk "View" vet + "Plus" regular in paars, zoals in viewplus-brand/logo-met-woordmerk.png.
+ * Woordmerk "View" vet + "Plus" regular in zwart (tekstkleur), net als bij Review Plus.
  */
 interface Props {
   /** Hoogte van het icoon in px; het woordmerk krijgt dezelfde lettergrootte. */
   size?: number;
   color?: string;
-  /** Kleur van het woordmerk; standaard het paars van het woordmerk. */
+  /** Kleur van het woordmerk; standaard zwart (tekstkleur). */
   textColor?: string;
   class?: string;
   /** Toon het woordmerk "View Plus" naast het icoon. */
   wordmark?: boolean;
 }
-const { size = 26, color = 'var(--color-logo)', textColor = 'var(--color-logo-woord)', class: cls = '', wordmark = false } = Astro.props;
+const { size = 26, color = 'var(--color-logo)', textColor = 'var(--color-ink)', class: cls = '', wordmark = false } = Astro.props;
 const width = Math.round((size * 906) / 958);
 ---
 <span class={`inline-flex items-center ${cls}`} style={`gap:${Math.round(size * 0.38)}px`}>

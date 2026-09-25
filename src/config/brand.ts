@@ -33,8 +33,8 @@ export const brand = {
  * `url` leeg = label nog niet live (wordt dan niet getoond in de schakelaar).
  */
 export const labels = [
-  { id: 'reviewplus', naam: ['Review', 'Plus'], url: 'https://www.reviewplus.io', kleur: 'var(--color-label-reviewplus)', wat: 'Reviews' },
-  { id: 'viewplus', naam: ['View', 'Plus'], url: 'https://www.viewplus.io', kleur: 'var(--color-label-viewplus)', wat: 'Social media' },
+  { id: 'reviewplus', naam: ['Review', 'Plus'], url: 'https://www.reviewplus.io', kleur: 'var(--color-label-reviewplus)', wat: 'Reviews', slogan: 'Meer en betere Google-reviews, automatisch.' },
+  { id: 'viewplus', naam: ['View', 'Plus'], url: 'https://www.viewplus.io', kleur: 'var(--color-label-viewplus)', wat: 'Social media', slogan: 'Social media en fotografie, volledig uit handen.' },
 ] as const;
 
 /** Pagina's die op beide sites bestaan: de schakelaar blijft dan op dezelfde pagina, anders naar home. */

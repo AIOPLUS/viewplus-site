@@ -55,7 +55,7 @@ const year = new Date().getFullYear();
       <a href={anderLabel.url} class="group mt-8 flex flex-wrap items-center justify-between gap-4 rounded-[var(--radius-card)] border border-line px-6 py-5 transition-colors hover:border-[var(--label)]" style={`--label:${anderLabel.kleur}`} data-track="label_wissel" data-track-plek="footer">
         <span class="flex items-center gap-3">
           <svg width="20" height="21" viewBox="0 0 906 958" fill={anderLabel.kleur} aria-hidden="true"><path d="M0 0H386V410A386 410 0 0 1 0 0Z" /><rect x="520" width="386" height="410" /><path d="M386 548V958H0A386 410 0 0 1 386 548Z" /><rect x="520" y="548" width="386" height="410" /></svg>
-          <span class="text-ink"><span class="font-semibold">{anderLabel.naam[0]}</span> {anderLabel.naam[1]}<span class="text-muted"> · ook meer Google-reviews? Ons zusterlabel regelt je online reputatie.</span></span>
+          <span class="text-ink"><span class="font-semibold">{anderLabel.naam[0]}</span> {anderLabel.naam[1]}<span class="text-muted"> · ons zusterlabel. {anderLabel.slogan}</span></span>
         </span>
         <span class="text-sm font-medium" style={`color:${anderLabel.kleur}`}>Naar {anderLabel.naam.join(' ')} →</span>
       </a>

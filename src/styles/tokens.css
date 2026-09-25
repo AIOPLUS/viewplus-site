@@ -1,7 +1,7 @@
 /*
  * Design tokens van viewplus.io. Zelfde systeem als reviewplus.io (Poppins, radius, schaduwen, breakpoints),
  * zodat beide labels als één geheel voelen; alleen de merkkleur verschilt.
- * View Plus-paars, gemeten in de brochure: beeldmerk #7A01B0, woordmerk #8000B0, lichte vlakken #F7E7FD.
+ * View Plus-paars, gemeten in de brochure: beeldmerk #7A01B0, lichte vlakken #F7E7FD. Het woordmerk is zwart (--color-ink).
  * Contrast (WCAG): wit op brand-400 5,5:1, op brand-600 8,5:1; brand-600 op brand-100 7,2:1.
  */
 @theme {
@@ -19,7 +19,6 @@
   --color-brand-800: #4d006f;
   --color-brand-900: #30004a;
   --color-logo: #7a01b0; /* beeldmerk */
-  --color-logo-woord: #8000b0; /* woordmerk */
 
   /* Kleuren van de labels, voor de labelschakelaar (elk label zijn eigen kleur) */
   --color-label-reviewplus: #1818ff;

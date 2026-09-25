@@ -63,7 +63,7 @@ npm run check    # typecheck + lint + build + linkcheck
 
 ## Beelden
 
-- **Merk**: favicon, `logo-icon.svg`, `logo-512.png`, `apple-touch-icon.png` en `og/home.png` zijn gemaakt uit het beeldmerk in `../viewplus-brand/` (paars #7A01B0, woordmerk #8000B0).
+- **Merk**: favicon, `logo-icon.svg`, `logo-512.png`, `apple-touch-icon.png` en `og/home.png` zijn gemaakt uit het beeldmerk in `../viewplus-brand/` (beeldmerk paars #7A01B0, woordmerk zwart).
 - **Achtergronden** (`bento-bg-*`, `cta-bg`, `hero-kaart-bg`, `pagina-hero-bg`, `uitkomst-bg`): de blauwe versies van reviewplus.io, paars gekleurd.
 - **Foto's** (`foto-*.jpg`): tijdelijk dezelfde foto's als reviewplus.io (eigen beelden van de oude site en Unsplash, zie de README van reviewplus-site). **Vervang ze door eigen werk** van klanten met toestemming; zet daarna `portfolio.voorbeeld` op `false`.
 
