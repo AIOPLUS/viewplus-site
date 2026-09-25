@@ -9,9 +9,9 @@ import CtaFinal from '@/components/sections/CtaFinal.astro';
 import { doelgroepen, pijlers } from '@/config/content';
 import { breadcrumbSchema } from '@/lib/schema';
 import { img } from '@/lib/images';
-import restaurant from '@/assets/img/foto-restaurant.jpg';
-import salon from '@/assets/img/foto-salon.jpg';
-import winkel from '@/assets/img/foto-winkel.jpg';
+import fotograaf from '@/assets/img/foto-fotograaf.jpg';
+import cafe from '@/assets/img/foto-cafe.jpg';
+import telefoon from '@/assets/img/foto-telefoon.jpg';
 
 /*
  * TODO Jordan: vul dit aan met jullie eigen verhaal (waarom View Plus is begonnen, wie erachter zit, waar jullie gevestigd zijn).
@@ -30,10 +30,10 @@ import winkel from '@/assets/img/foto-winkel.jpg';
   <section class="py-16 lg:py-24" aria-labelledby="missie-title">
     <div class="container-rp grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
       <div class="reveal grid grid-cols-2 gap-4">
-        <Image src={restaurant} alt="Restauranthouder met gasten" widths={[300, 600]} sizes="300px" class="aspect-[4/5] w-full rounded-[var(--radius-panel)] object-cover" />
+        <Image src={fotograaf} alt="Fotograaf fotografeert een dessert" widths={[300, 600]} sizes="300px" class="aspect-[4/5] w-full rounded-[var(--radius-panel)] object-cover" />
         <div class="grid gap-4 pt-10">
-          <Image src={salon} alt="Interieur van een beautysalon" widths={[300, 600]} sizes="300px" class="aspect-square w-full rounded-[var(--radius-panel)] object-cover" />
-          <Image src={winkel} alt="Ondernemer in haar winkel" widths={[300, 600]} sizes="300px" class="aspect-square w-full rounded-[var(--radius-panel)] object-cover" />
+          <Image src={cafe} alt="Sfeervol café met houten tafels en planten" widths={[300, 600]} sizes="300px" class="aspect-square w-full rounded-[var(--radius-panel)] object-cover" />
+          <Image src={telefoon} alt="Gasten maken met hun telefoon een foto van een pizza" widths={[300, 600]} sizes="300px" class="aspect-square w-full rounded-[var(--radius-panel)] object-cover" />
         </div>
       </div>
       <div class="reveal grid gap-6">

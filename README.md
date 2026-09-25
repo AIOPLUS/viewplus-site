@@ -66,7 +66,26 @@ npm run check    # typecheck + lint + build + linkcheck
 
 - **Merk**: favicon, `logo-icon.svg`, `logo-512.png`, `apple-touch-icon.png` en `og/home.png` zijn gemaakt uit het beeldmerk in `../viewplus-brand/` (beeldmerk paars #7A01B0, woordmerk zwart).
 - **Achtergronden** (`bento-bg-*`, `cta-bg`, `hero-kaart-bg`, `pagina-hero-bg`, `uitkomst-bg`): de blauwe versies van reviewplus.io, paars gekleurd.
-- **Foto's** (`foto-*.jpg`): tijdelijk dezelfde foto's als reviewplus.io (eigen beelden van de oude site en Unsplash, zie de README van reviewplus-site). **Vervang ze door eigen werk** van klanten met toestemming; zet daarna `portfolio.voorbeeld` op `false`.
+- **Foto's** (`foto-*.jpg`): tijdelijke voorbeeldfoto's. **Vervang ze door eigen werk** van klanten met toestemming; zet daarna `portfolio.voorbeeld` op `false`.
+  - `foto-salon.jpg` komt van reviewplus.io (beeld van de oude Framer-site).
+  - De rest komt van Unsplash (gratis, ook commercieel, naamsvermelding niet verplicht; https://unsplash.com/license), gedownload op 25-09-2026:
+
+| Bestand | Unsplash-foto | Fotograaf |
+|---|---|---|
+| `foto-gerecht-saus.jpg` | https://unsplash.com/photos/chef-pouring-sauce-over-plated-steak-MaWMfm-HCqQ | Urban Gyllström |
+| `foto-gerecht.jpg` | https://unsplash.com/photos/meat-and-vegetable-on-plate-Xk0jQPZseMk | Eugene |
+| `foto-pasta.jpg` | https://unsplash.com/photos/a-plate-of-spaghetti-with-tomato-sauce-and-parsley-Htb3Neu9Tmg | Mandy Bourke |
+| `foto-tafel.jpg` | https://unsplash.com/photos/a-table-with-a-plate-of-food-and-a-glass-of-wine-tuI5Xu4iHUI | Thimotius Timmy |
+| `foto-latte.jpg` | https://unsplash.com/photos/cafe-latte-Nw8wbiDE3gU | Phil Desforges |
+| `foto-cafe.jpg` | https://unsplash.com/photos/rustic-cafe-interior-with-wooden-furniture-xhKG01FN2uk | Ruben Ramirez |
+| `foto-bar.jpg` | https://unsplash.com/photos/a-man-is-making-a-drink-at-a-bar-HN2ukPUF_og | Olena Bohovyk |
+| `foto-chef.jpg` | https://unsplash.com/photos/person-putting-food-on-plate-cQbOSRpElxw | Sebastian Coman Photography |
+| `foto-fotograaf.jpg` | https://unsplash.com/photos/woman-taking-photo-of-donuts-4LDoRe_Lne8 | Szabo Viktor |
+| `foto-telefoon.jpg` | https://unsplash.com/photos/person-holding-black-smartphone-taking-photo-of-pizza-1uQQrwzjKms | Yoav Aziz |
+| `foto-kapper.jpg` | https://unsplash.com/photos/hairstylist-blow-drying-client-hair-FkAZqQJTbXM | Adam Winger |
+| `foto-boetiek.jpg` | https://unsplash.com/photos/a-clothing-store-with-clothes-and-hats-on-display-2gLL2ZgBlcU | Laura Peruchi |
+| `foto-bakkerij.jpg` | https://unsplash.com/photos/breads-in-display-shelf-go3DT3PpIw4 | Yeh Xintong |
+| `foto-gevel.jpg` | https://unsplash.com/photos/the-outside-of-a-restaurant-with-tables-and-chairs-OG_fvZHurYw | Alena Torgonskaya |
 
 ## Nog te doen (Jordan)
 

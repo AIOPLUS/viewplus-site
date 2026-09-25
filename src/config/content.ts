@@ -63,10 +63,10 @@ export const doelen = [
 
 /** Doelgroepen (Over ons, #voor-wie). Foto's uit src/assets/img. */
 export const doelgroepen = [
-  { naam: 'Horeca', tekst: 'Restaurants, cafés en bars', foto: 'foto-restaurant.jpg' },
-  { naam: 'Winkels', tekst: 'Lokale winkels en boetieks', foto: 'foto-winkel.jpg' },
-  { naam: 'Beauty & wellness', tekst: 'Salons, kappers en sportscholen', foto: 'foto-salon.jpg' },
-  { naam: 'Lokale ondernemers', tekst: 'Elke zaak met een verhaal', foto: 'foto-hotel.jpg' },
+  { naam: 'Horeca', tekst: 'Restaurants, cafés en bars', foto: 'foto-gevel.jpg' },
+  { naam: 'Winkels', tekst: 'Lokale winkels en boetieks', foto: 'foto-boetiek.jpg' },
+  { naam: 'Beauty & wellness', tekst: 'Salons, kappers en sportscholen', foto: 'foto-kapper.jpg' },
+  { naam: 'Lokale ondernemers', tekst: 'Elke zaak met een verhaal', foto: 'foto-bakkerij.jpg' },
 ] as const;
 
 /**
@@ -75,17 +75,20 @@ export const doelgroepen = [
  */
 export const portfolio = {
   voorbeeld: true,
-  categorieen: ['Horeca', 'Winkels', 'Beauty & wellness', 'Overig'],
+  categorieen: ['Horeca', 'Winkels', 'Beauty & wellness'],
   items: [
-    { foto: 'foto-restaurant.jpg', categorie: 'Horeca', alt: 'Restauranthouder in gesprek met gasten' },
+    { foto: 'foto-gerecht-saus.jpg', categorie: 'Horeca', alt: 'Chef giet saus over een opgemaakt gerecht' },
+    { foto: 'foto-latte.jpg', categorie: 'Horeca', alt: 'Cappuccino met latte art' },
+    { foto: 'foto-boetiek.jpg', categorie: 'Winkels', alt: 'Kledingboetiek met kleding en hoeden' },
+    { foto: 'foto-pasta.jpg', categorie: 'Horeca', alt: 'Spaghetti met tomatensaus en peterselie' },
+    { foto: 'foto-kapper.jpg', categorie: 'Beauty & wellness', alt: 'Kapper föhnt het haar van een klant' },
+    { foto: 'foto-bar.jpg', categorie: 'Horeca', alt: 'Bartender maakt een cocktail' },
+    { foto: 'foto-bakkerij.jpg', categorie: 'Winkels', alt: 'Brood en gebak in de vitrine van een bakkerij' },
+    { foto: 'foto-cafe.jpg', categorie: 'Horeca', alt: 'Sfeervol café met houten tafels en planten' },
     { foto: 'foto-salon.jpg', categorie: 'Beauty & wellness', alt: 'Interieur van een beautysalon' },
-    { foto: 'foto-vrije-tijd.jpg', categorie: 'Overig', alt: 'Arcadekasten in een speelhal' },
-    { foto: 'foto-winkel.jpg', categorie: 'Winkels', alt: 'Ondernemer aan de toonbank van haar winkel' },
-    { foto: 'foto-hotel.jpg', categorie: 'Horeca', alt: 'Gastheer achter de balie' },
-    { foto: 'foto-sportschool.jpg', categorie: 'Beauty & wellness', alt: 'Twee mensen trainen in een sportschool' },
-    { foto: 'foto-franchise.jpg', categorie: 'Winkels', alt: 'Twee medewerkers in een supermarkt' },
-    { foto: 'foto-zorg.jpg', categorie: 'Overig', alt: 'Behandelaar in een praktijk' },
-    { foto: 'foto-autobedrijf.jpg', categorie: 'Overig', alt: 'Showroom van een autobedrijf' },
+    { foto: 'foto-chef.jpg', categorie: 'Horeca', alt: 'Chef maakt borden op in de keuken' },
+    { foto: 'foto-tafel.jpg', categorie: 'Horeca', alt: 'Gedekte tafel met pasta en een glas wijn' },
+    { foto: 'foto-gevel.jpg', categorie: 'Horeca', alt: 'Terras en gevel van een restaurant' },
   ],
 } as const;
 

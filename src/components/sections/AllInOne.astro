@@ -4,17 +4,17 @@ import ArrowButton from '@/components/ui/ArrowButton.astro';
 import { pijlers } from '@/config/content';
 import { url } from '@/lib/url';
 import { iconen } from '@/lib/iconen';
-import restaurant from '@/assets/img/foto-restaurant.jpg';
-import winkel from '@/assets/img/foto-winkel.jpg';
-import salon from '@/assets/img/foto-salon.jpg';
-import hotel from '@/assets/img/foto-hotel.jpg';
+import gerecht from '@/assets/img/foto-gerecht-saus.jpg';
+import boetiek from '@/assets/img/foto-boetiek.jpg';
+import kapper from '@/assets/img/foto-kapper.jpg';
+import bar from '@/assets/img/foto-bar.jpg';
 
 // Zwevende sfeerfoto's rond de tekst, zoals op reviewplus.io.
 const fotos = [
-  { src: restaurant, alt: 'Restauranthouder in gesprek met gasten', pos: 'left-0 top-4', delay: '0s' },
-  { src: winkel, alt: 'Ondernemer in haar winkel', pos: 'right-0 top-24', delay: '1.2s' },
-  { src: salon, alt: 'Interieur van een beautysalon', pos: 'left-[6%] bottom-0', delay: '.6s' },
-  { src: hotel, alt: 'Gastheer achter de balie', pos: 'right-[4%] -bottom-10', delay: '1.8s' },
+  { src: gerecht, alt: 'Chef giet saus over een opgemaakt gerecht', pos: 'left-0 top-4', delay: '0s' },
+  { src: boetiek, alt: 'Kledingboetiek met kleding en hoeden', pos: 'right-0 top-24', delay: '1.2s' },
+  { src: kapper, alt: 'Kapper föhnt het haar van een klant', pos: 'left-[6%] bottom-0', delay: '.6s' },
+  { src: bar, alt: 'Bartender maakt een cocktail', pos: 'right-[4%] -bottom-10', delay: '1.8s' },
 ];
 ---
 <section class="relative py-24 lg:py-40" aria-labelledby="allinone-title">
