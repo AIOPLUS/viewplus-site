@@ -1,5 +1,7 @@
 # Livegang View Plus (www.viewplus.io en shop.viewplus.io)
 
+> **Live sinds 26-09-2026.** Gedaan: DNS (hoofdstuk 3), repo's omgezet met custom domain en HTTPS (hoofdstuk 4), labels.json op live (5.1). Nog open: Make en Mollie (hoofdstuk 2), Search Console (5.2), mailbox (1.1), eigen foto's, juridische naam.
+
 Eén checklist voor de site en de shop. Nu draaien ze als testversie:
 - https://aioplus.github.io/viewplus-site
 - https://aioplus.github.io/viewplus-shop
