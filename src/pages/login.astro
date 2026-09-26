@@ -1,0 +1,29 @@
+---
+/**
+ * Tijdelijke inlogpagina voor View Plus Online. Het eigen portaal (app.viewplus.io) komt later; zet dan de
+ * GitHub-variabele PUBLIC_APP_LOGIN_URL, dan wijzen alle "Log in"-knoppen daarheen. Niet geïndexeerd.
+ */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHero from '@/components/sections/PageHero.astro';
+import { brand } from '@/config/brand';
+import { url } from '@/lib/url';
+---
+<BaseLayout title="Inloggen | View Plus" description="Inloggen op View Plus Online." path="/login" page="login" noindex>
+  <PageHero line1="Inloggen op" line2="View Plus Online" text="Hier log je binnenkort in op View Plus Online, ons eigen portaal voor klanten." compact />
+
+  <section class="pb-16 lg:pb-24">
+    <div class="container-rp mx-auto grid max-w-[760px] gap-4">
+      <div class="soft-card grid justify-items-center gap-4 p-10 text-center">
+        <span class="grid size-14 place-items-center rounded-full bg-white text-brand-600 shadow-[var(--shadow-card)]" aria-hidden="true">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2" /><path d="M8 11V7a4 4 0 0 1 8 0v4" /></svg>
+        </span>
+        <h2 class="heading-md">Het portaal is nog in de maak</h2>
+        <p class="max-w-[520px] text-ink-soft">We bouwen op dit moment aan het portaal van View Plus Online. Heb je een vraag over je account of je social media? Neem gerust contact met ons op.</p>
+        <div class="flex flex-wrap justify-center gap-3">
+          <a href={url('/contact')} class="btn btn-primary">Neem contact op</a>
+          <a href={`mailto:${brand.email}`} class="btn btn-soft">{brand.email}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

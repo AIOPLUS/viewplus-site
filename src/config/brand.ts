@@ -11,8 +11,11 @@ export const brand = {
    * testversie https://aioplus.github.io/viewplus-shop, live https://shop.viewplus.io. Leeg = geen "Shop" in menu en footer.
    */
   shopUrl: (import.meta.env.PUBLIC_SHOP_URL || '').replace(/\/+$/, ''),
-  /** Eigen app (later). Leeg = geen "Inloggen". */
-  appLoginUrl: '',
+  /**
+   * Inloggen op View Plus Online (eigen software, komt later op app.viewplus.io). Uit de GitHub-variabele
+   * PUBLIC_APP_LOGIN_URL; zolang die leeg is, gaat "Log in" naar de tijdelijke pagina /login op deze site.
+   */
+  appLoginUrl: (import.meta.env.PUBLIC_APP_LOGIN_URL || '/login').replace(/\/+$/, '') || '/login',
   // LET OP: deze mailbox is nog niet actief (25-09-2026). Activeer hem vóór de livegang.
   email: 'support@viewplus.io',
   /** Rasterlogo voor schema.org/Google (min. 112px). Icoon zelf: components/layout/Logo.astro */
@@ -76,7 +79,7 @@ export const footerNav: { title: string; links: Link[] }[] = [
       { label: 'Plan afsluiten', href: '/aanmelden' },
       { label: 'Portfolio', href: '/portfolio' },
       ...(brand.shopUrl ? [{ label: 'Shop', href: brand.shopUrl }] : []),
-      ...(brand.appLoginUrl ? [{ label: 'Inloggen', href: brand.appLoginUrl }] : []),
+      { label: 'Inloggen', href: brand.appLoginUrl },
     ],
   },
   {

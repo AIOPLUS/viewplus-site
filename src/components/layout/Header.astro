@@ -44,9 +44,8 @@ const current = Astro.url.pathname;
     </nav>
 
     <div class="flex items-center gap-2">
-      {brand.appLoginUrl && <a href={brand.appLoginUrl} class="btn btn-soft !min-h-[44px] !px-5 max-sm:hidden">Log in</a>}
+      <a href={url(brand.appLoginUrl)} class="btn btn-primary !min-h-[44px] !px-5 max-sm:hidden">Log in</a>
       {brand.shopUrl && <a href={brand.shopUrl} class="btn btn-white !min-h-[44px] !px-5 max-sm:hidden">Shop</a>}
-      <a href={url('/contact')} class="btn btn-primary !min-h-[44px] !px-5 max-sm:hidden" data-track="kennismaking_klik" data-track-plek="header">Kennismaken</a>
       <button
         type="button"
         class="grid size-11 place-items-center rounded-full bg-brand-100 text-brand-600 lg:hidden"
@@ -75,10 +74,9 @@ const current = Astro.url.pathname;
           </li>
         ))}
       </ul>
-      <div class="grid gap-2">
-        <a href={url('/contact')} class="btn btn-primary">Plan een kennismaking</a>
+      <div class:list={['grid gap-2', brand.shopUrl && 'grid-cols-2']}>
+        <a href={url(brand.appLoginUrl)} class="btn btn-primary">Log in</a>
         {brand.shopUrl && <a href={brand.shopUrl} class="btn btn-soft">Shop</a>}
-        {brand.appLoginUrl && <a href={brand.appLoginUrl} class="btn btn-soft">Log in</a>}
       </div>
     </div>
   </div>
