@@ -6,6 +6,8 @@ export type EventName =
   | 'kennismaking_klik'
   | 'prijs_klik'
   | 'label_wissel'
+  | 'labels_geopend'
+  | 'label_klik'
   | 'shop_klik'
   | 'contact_verzonden'
   | 'nieuwsbrief_aangemeld'

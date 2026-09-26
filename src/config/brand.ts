@@ -34,17 +34,13 @@ export const brand = {
 } as const;
 
 /**
- * Labels van AIO PLUS. De labelschakelaar bovenaan beide sites gebruikt deze lijst, zodat Review Plus en
- * View Plus aanvoelen als één omgeving. Houd deze lijst gelijk met die in reviewplus-site.
- * `url` leeg = label nog niet live (wordt dan niet getoond in de schakelaar).
+ * Zusterlabel voor de promotieband (LabelBand) en llms.txt, met eigen teksten.
+ * De labelwisselaar van AIO Plus gebruikt de centrale lijst: zie src/lib/labels.ts.
  */
 export const labels = [
   { id: 'reviewplus', naam: ['Review', 'Plus'], url: 'https://www.reviewplus.io', kleur: 'var(--color-label-reviewplus)', wat: 'Reviews', slogan: 'Meer en betere Google-reviews, automatisch.' },
   { id: 'viewplus', naam: ['View', 'Plus'], url: 'https://www.viewplus.io', kleur: 'var(--color-label-viewplus)', wat: 'Social media', slogan: 'Social media en fotografie, volledig uit handen.' },
 ] as const;
-
-/** Pagina's die op beide sites bestaan: de schakelaar blijft dan op dezelfde pagina, anders naar home. */
-export const gedeeldePaden: readonly string[] = ['/', '/features', '/plans', '/about', '/contact', '/articles', '/jobs', '/aanmelden', '/privacy-policy', '/term-and-conditions'];
 
 /** Hoofdmenu: zelfde opbouw als reviewplus.io, met Portfolio erbij. */
 export const mainNav = [
