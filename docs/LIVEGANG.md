@@ -15,7 +15,7 @@ De testversies staan niet in Google: robots.txt blokkeert ze. Op het echte domei
 | # | Wat | Wie |
 |---|---|---|
 | 1.1 | Mailbox support@viewplus.io actief. Stuur zelf een testmail. | J |
-| 1.2 | Echte algemene voorwaarden (site) en verkoopvoorwaarden (shop). Nu staat er "in voorbereiding". In de verkoopvoorwaarden horen:<br>- de pre-order: vooraf betalen, levering zodra de tellers binnen zijn;<br>- annuleren en retour;<br>- de verlenging en opzegging van View Plus Online.<br>Concepten met keuzes: `viewplus-site/docs/CONCEPT-ALGEMENE-VOORWAARDEN.md` en `viewplus-shop/docs/CONCEPT-VERKOOPVOORWAARDEN.md`. | J kiest, jurist controleert, C zet ze online |
+| 1.2 | ~~Voorwaarden~~ **Gedaan 26-09-2026**: algemene voorwaarden (site) en verkoopvoorwaarden met pre-order (shop) staan online. Nog: juridische naam en KvK-nummer toevoegen, bij voorkeur controle door een jurist. | J |
 | 1.3 | Smiirl-resellerafspraken rond. Dit moet klaar zijn voordat de shop pre-orders met betaling aanneemt. | J |
 | 1.4 | Eigen foto's (met toestemming van klanten) in plaats van de voorbeeldfoto's. Zet daarna `portfolio.voorbeeld` op `false`. | J levert aan, C plaatst |
 | 1.5 | Juridische naam en socials in `src/config/brand.ts` (site en shop). | J levert aan, C zet erin |

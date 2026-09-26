@@ -37,7 +37,7 @@ De site van View Plus: social media management, fotografie en content voor lokal
 - Je kiest View Plus Online (1, 3 of 12 maanden) en/of Fotografie (1, 2 of 4 shoots per jaar); minstens één.
 - De prijskaarten linken naar `/aanmelden?online=<optie>` of `/aanmelden?fotografie=<optie>`.
 - Payload: `request_type: "abonnement"`, `merk: "viewplus"`, `plan: { online, fotografie }` (optie-id of null), plus bedrijf, adres, contact, factuur_email en akkoord. Make moet de prijzen zelf opnieuw uitrekenen uit `src/config/content.ts`.
-- **Voor de livegang**: echte algemene voorwaarden (nu "in voorbereiding") en de afspraken over facturering en verlenging.
+- **Voorwaarden**: de algemene voorwaarden staan online (26-09-2026); de gemaakte keuzes staan in `docs/CONCEPT-ALGEMENE-VOORWAARDEN.md`. Nog toevoegen: juridische naam en KvK-nummer.
 
 ## Formulieren
 
