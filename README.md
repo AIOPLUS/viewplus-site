@@ -65,13 +65,15 @@ npm run check    # typecheck + lint + build + linkcheck
 
 ## Live zetten op www.viewplus.io (later)
 
+Volledige checklist voor site én shop: [docs/LIVEGANG.md](docs/LIVEGANG.md).
+
 1. `public/CNAME` met `www.viewplus.io` toevoegen.
 2. GitHub-variabelen: `SITE_URL=https://www.viewplus.io`, `BASE_PATH=/`.
 3. GitHub → Settings → Pages → Custom domain `www.viewplus.io` → Enforce HTTPS zodra het certificaat er is.
 4. DNS bij GoDaddy: A-records van `viewplus.io` (@) naar 185.199.108.153, .109.153, .110.153, .111.153 en `www` als CNAME naar `aioplus.github.io`.
 5. Controleer dat support@viewplus.io mail ontvangt.
 6. Cloudflare Turnstile: `www.viewplus.io` en `viewplus.io` als hostname toevoegen.
-7. In `reviewplus-site`: de labelschakelaar live zetten (zie de branch `labelschakelaar`).
+7. In `reviewplus-site/src/data/labels.json`: View Plus op `status: "live"` zetten en de sites opnieuw deployen (labelwisselaar).
 
 ## Beelden
 
