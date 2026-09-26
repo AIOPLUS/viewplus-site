@@ -7,7 +7,7 @@ export const brand = {
   legalName: 'View Plus', // TODO Jordan: juridische naam (zoals in KvK) invullen.
   siteUrl: 'https://www.viewplus.io',
   /**
-   * Webshop (live tellers en NFC-volgstandaards). Uit de GitHub-variabele PUBLIC_SHOP_URL:
+   * Webshop (live volgerstellers). Uit de GitHub-variabele PUBLIC_SHOP_URL:
    * testversie https://aioplus.github.io/viewplus-shop, live https://shop.viewplus.io. Leeg = geen "Shop" in menu en footer.
    */
   shopUrl: (import.meta.env.PUBLIC_SHOP_URL || '').replace(/\/+$/, ''),
