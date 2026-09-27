@@ -41,7 +41,7 @@ De site van View Plus: social media management, fotografie en content voor lokal
 
 ## Formulieren
 
-Contact, nieuwsbrief en sollicitaties sturen JSON met `merk: "viewplus"` naar `PUBLIC_LEAD_WEBHOOK_URL`. Zolang die leeg is, verwijst het formulier naar het e-mailadres uit `brand.ts`. De Make-koppeling volgt later (zie `../CLAUDE.md`).
+Contact, nieuwsbrief en sollicitaties sturen JSON met `merk: "viewplus"` naar `PUBLIC_LEAD_WEBHOOK_URL`. Zolang die leeg is, verwijst het formulier naar het e-mailadres uit `brand.ts`. Make-route 10 (contact en nieuwsbrief) bestaat; de variabele is nog niet gezet (zie de hub `AIOPLUS/claude`, `docs/OPEN-PUNTEN.md`).
 
 ## Lokaal
 
@@ -77,7 +77,7 @@ Volledige checklist voor site én shop: [docs/LIVEGANG.md](docs/LIVEGANG.md).
 
 ## Beelden
 
-- **Merk**: favicon, `logo-icon.svg`, `logo-512.png`, `apple-touch-icon.png` en `og/home.png` zijn gemaakt uit het beeldmerk in `../viewplus-brand/` (beeldmerk paars #7A01B0, woordmerk zwart).
+- **Merk**: favicon, `logo-icon.svg`, `logo-512.png`, `apple-touch-icon.png` en `og/home.png` zijn gemaakt uit het beeldmerk in de hub (`AIOPLUS/claude`, map `merk/viewplus/`) (beeldmerk paars #7A01B0, woordmerk zwart).
 - **Achtergronden** (`bento-bg-*`, `cta-bg`, `hero-kaart-bg`, `pagina-hero-bg`, `uitkomst-bg`): de blauwe versies van reviewplus.io, paars gekleurd.
 - **Foto's** (`foto-*.jpg`): tijdelijke voorbeeldfoto's. **Vervang ze door eigen werk** van klanten met toestemming; zet daarna `portfolio.voorbeeld` op `false`.
   - `foto-salon.jpg` komt van reviewplus.io (beeld van de oude Framer-site).
